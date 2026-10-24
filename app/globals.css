@@ -3767,3 +3767,14 @@ button:disabled {
   .academy-stats { display: none; }
   .academy-lead { max-width: 60ch; }
 }
+
+/* Poker-first screen: minimize framing and put the live table immediately below navigation. */
+.practice-heading-compact { margin: 0 0 14px; }
+.practice-heading-compact h1 { font-size: 21px; margin: 0; letter-spacing: -0.4px; }
+.practice-heading-compact .session-status { display: none; }
+@media (max-width: 760px) {
+  .practice-heading-compact { margin-bottom: 10px; }
+  .practice-heading-compact h1 { font-size: 18px; }
+  .page-content { padding-top: 14px; }
+  .workspace-simplified { margin-bottom: 12px !important; }
+}
