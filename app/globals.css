@@ -4015,3 +4015,11 @@ button:disabled {
 .table-scene .seat-cards .playing-card:not(.card-back) { transition:filter .2s, transform .2s; }
 .table-scene .active-seat .seat-info { box-shadow:0 0 0 2px #bce49d61, 0 0 20px #bce49d26; }
 @media(prefers-reduced-motion:reduce){.table-scene .community .playing-card:not(:has(.empty-card)),.table-scene .street-tag{animation:none!important}}
+
+/* Showdown five-card selection. Distinguish the hero's evaluated hand visually. */
+.best-five-card { display:inline-flex; border-radius:7px; box-shadow:0 0 0 3px #f1d16e,0 0 18px #f5d57066; position:relative; z-index:8; }
+.non-best-card { display:inline-flex; opacity:.58; filter:saturate(.65); }
+.seat-cards .best-five-card,.seat-cards .non-best-card { margin:0; }
+.community > span { display:inline-flex; }
+.showdown-summary span { overflow-wrap:anywhere; }
+@media(max-width:760px){.best-five-card{box-shadow:0 0 0 2px #f1d16e,0 0 10px #f5d57066}}
