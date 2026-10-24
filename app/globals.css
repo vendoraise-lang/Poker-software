@@ -3983,3 +3983,24 @@ button:disabled {
 @keyframes result-in { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
 @media (max-width:760px){.showdown-summary {padding:8px 10px}.showdown-summary strong {font-size:16px} .play-screen .hand-result {flex-wrap:wrap;}}
 @media (prefers-reduced-motion:reduce){.showdown-summary.showdown-win{animation:none}}
+
+/* Phase 2: make chips legible without covering the board or player information. */
+.dealer-position {
+  width:22px; height:22px; display:grid; place-items:center;
+  flex-shrink:0; border-radius:50%; background:#f6edcf; color:#2a3028;
+  border:2px solid #a7a088; box-shadow:0 2px 5px #0008; font-weight:800;
+}
+.seat-bet { white-space:nowrap; pointer-events:none; }
+.seat-0 .seat-bet { top:-26px; left:50%; right:auto; }
+.seat-1 .seat-bet { top:80px; right:-25px; left:auto; }
+.seat-2 .seat-bet { top:auto; bottom:-30px; left:50%; }
+.seat-3 .seat-bet { top:80px; left:-25px; right:auto; }
+@media(max-width:760px) {
+  .play-screen .seat-0 .seat-bet { top:-22px; left:50%; }
+  .play-screen .seat-1 .seat-bet { top:92px; right:-9px; left:auto; }
+  .play-screen .seat-2 .seat-bet { bottom:-28px; top:auto; }
+  .play-screen .seat-3 .seat-bet { top:92px; left:-9px; right:auto; }
+  .play-screen .seat-bet { z-index:3; }
+  .play-screen .board-area { z-index:6; }
+  .play-screen .seat-0 .seat-cards { position:relative; z-index:7; }
+}
