@@ -11,12 +11,33 @@ import HandReplay from "@/components/HandReplay";
 import PlayerSeat from "@/components/PlayerSeat";
 import {
   botAction,
+  compare,
   evaluate,
+  type Card as PokerCard,
   legal,
   position,
   ranks,
   type Action,
 } from "@/lib/poker";
+
+function bestFiveIndices(cards: PokerCard[]): number[] {
+  if (cards.length < 5) return [];
+  let best: number[] = [];
+  let value: number[] = [];
+  for (let a = 0; a < cards.length - 4; a++)
+    for (let b = a + 1; b < cards.length - 3; b++)
+      for (let c = b + 1; c < cards.length - 2; c++)
+        for (let d = c + 1; d < cards.length - 1; d++)
+          for (let e = d + 1; e < cards.length; e++) {
+            const indices = [a, b, c, d, e];
+            const next = evaluate(indices.map(i => cards[i]));
+            if (!best.length || compare(next, value) > 0) {
+              best = indices;
+              value = next;
+            }
+          }
+  return best;
+}
 
 const lessons = [
   {
@@ -116,7 +137,13 @@ export default function Home() {
   const heroMadeHand = hero.cards.length === 2 && game.board.length >= 3
     ? ranks[evaluate([...hero.cards, ...game.board])[0]]
     : null;
-  const heroWon = complete && /You receives [1-9][0-9]*/i.test(game.feedback);
+  const heroWon = complete && game.awards[0] > 0;
+  const recipients = game.awards.map((amount, i) => ({ amount, name: game.players[i].name })).filter(x => x.amount > 0);
+  const atShowdown = complete && game.board.length === 5;
+  const bestHero = atShowdown && !hero.folded && hero.cards.length === 2
+    ? bestFiveIndices([...hero.cards, ...game.board]) : [];
+  const heroBestBoard = new Set(bestHero.filter(i => i >= 2).map(i => i - 2));
+  const heroBestHole = new Set(bestHero.filter(i => i < 2));
   return (
     <div className="app-shell">
       <Suspense fallback={null}>
@@ -254,7 +281,7 @@ export default function Home() {
                       </span>
                     </div>
                     {game.players.map((_, i) => (
-                      <PlayerSeat key={i} game={game} index={i} />
+                      <PlayerSeat key={i} game={game} index={i} highlightedCards={i === 0 && bestHero.length > 0 ? heroBestHole : undefined} />
                     ))}
                     <div className="board-area">
                       <div className="pot-label">
@@ -263,7 +290,7 @@ export default function Home() {
                       </div>
                       <div className="community">
                         {Array.from({ length: 5 }, (_, i) => (
-                          <Card key={`${game.hand}-${i}-${game.board[i] ? "dealt" : "empty"}`} card={game.board[i]} />
+                          <span key={`${game.hand}-${i}-${game.board[i] ? "dealt" : "empty"}`} className={bestHero.length && heroBestBoard.has(i) ? "best-five-card" : bestHero.length ? "non-best-card" : undefined}><Card card={game.board[i]} /></span>
                         ))}
                       </div>
                       <div className="street-tag" key={`${game.hand}-${game.street}`}>
@@ -296,8 +323,9 @@ export default function Home() {
                     {complete ? (
                       <div className="hand-result">
                         <div className={`showdown-summary ${heroWon ? "showdown-win" : ""}`} role="status" aria-live="polite">
-                          <strong>{heroWon ? "YOU WIN" : "HAND COMPLETE"}</strong>
-                          <span>{heroWon && heroMadeHand ? `${heroMadeHand} · ${pot.toLocaleString()} chips awarded` : game.feedback}</span>
+                          <strong>{heroWon ? "YOU RECEIVE CHIPS" : "HAND COMPLETE"}</strong>
+                          <span>{recipients.map(r => `${r.name}: ${r.amount.toLocaleString()} chips`).join(" · ") || game.feedback}</span>
+                          {bestHero.length > 0 && <span>Your best five: {heroMadeHand}. Highlighted cards form your hand.</span>}
                         </div>
                         <p>{game.feedback}</p>
                         <button className="primary" onClick={next}>
