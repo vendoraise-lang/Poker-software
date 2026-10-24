@@ -255,7 +255,7 @@ export default function Home() {
                     <div className="board-area">
                       <div className="pot-label">
                         {complete ? "FINAL POT" : "TOTAL POT"}{" "}
-                        <b>◉ {pot.toLocaleString()}</b>
+                        <b>{pot.toLocaleString()}</b>
                       </div>
                       <div className="community">
                         {Array.from({ length: 5 }, (_, i) => (
