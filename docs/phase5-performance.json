@@ -1,0 +1,14 @@
+{
+  "node": "v24.19.0",
+  "cpu": "AMD EPYC 9V74 80-Core Processor",
+  "logicalCPUs": 5,
+  "memoryGiB": 33.29,
+  "method": "median of 5 runs after one warm-up; wall-clock ms, Node synchronous batches; no worker/yield overhead",
+  "reviewDecisions": 4,
+  "measurementsMs": {
+    "reconstructCompletedHand": 5.476,
+    "expandFull169Range": 0.786,
+    "weightedExact42Allocations": 5.336,
+    "weightedMonteCarlo10000": 625.437
+  }
+}

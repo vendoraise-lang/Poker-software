@@ -1,0 +1,8 @@
+{
+  "environment": "Headless Chromium against the production build on the same cloud machine described in phase5-performance.json; two concurrent Playwright workers",
+  "method": "Single observed end-to-end measurements from the passing production browser tests; includes worker startup, cooperative yields, rendering and test-observation latency. Not medians or latency guarantees.",
+  "measurementsMs": {
+    "compareEarlierFlopAndCurrentTurnTwoJobs3000TrialsEachFourPlayers": 1516,
+    "weightedFlopOneRangeTwoUniformOpponents3000TrialsFourPlayers": 1005
+  }
+}

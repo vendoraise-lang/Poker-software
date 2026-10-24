@@ -1,0 +1,49 @@
+{
+  "name": "poker-software",
+  "version": "1.0.0",
+  "description": "PokerLab \u2014 a local-first Texas Hold\u2019em practice room",
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0",
+    "build": "next build",
+    "start": "next start --hostname 0.0.0.0",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "bench:review": "vitest run --config vitest.performance.config.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vendoraise-lang/Poker-software.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/vendoraise-lang/Poker-software/issues"
+  },
+  "homepage": "https://github.com/vendoraise-lang/Poker-software#readme",
+  "dependencies": {
+    "next": "^16.4.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.3",
+    "prettier": "^3.9.10",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.5"
+  },
+  "private": true,
+  "engines": {
+    "node": "24.x"
+  }
+}

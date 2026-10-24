@@ -1,0 +1,29 @@
+# Installed dependencies and generated output
+node_modules/
+.next/
+out/
+build/
+dist/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+.cache/
+
+# Local credentials and deployment linkage
+.env
+.env.*
+!.env.example
+.vercel/
+.npmrc
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+
+# Test output and local diagnostics
+playwright-report/
+test-results/
+blob-report/
+*.log
+.DS_Store
