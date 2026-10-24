@@ -134,6 +134,13 @@ export default function Home() {
     setError("");
   }
   const complete = game.street === "Showdown";
+  const handCoach = hero.folded
+    ? { title: "Review your fold", detail: "Was the price worth continuing against this opponent?", href: "/practice/opening", action: "Practice starting hands" }
+    : game.board.length === 5
+      ? { title: "Review your river decision", detail: "Think about value, bluffs, and which worse hands could call.", href: "/practice/postflop", action: "Practice postflop decisions" }
+      : game.board.length >= 3
+        ? { title: "Review the flop", detail: "Consider position, board texture, and opponent range.", href: "/practice/postflop", action: "Practice postflop decisions" }
+        : { title: "Review your preflop choice", detail: "Think about starting hand strength and your position.", href: "/practice/opening", action: "Practice starting hands" };
   const heroMadeHand = hero.cards.length === 2 && game.board.length >= 3
     ? ranks[evaluate([...hero.cards, ...game.board])[0]]
     : null;
@@ -327,7 +334,10 @@ export default function Home() {
                           <span>{recipients.map(r => `${r.name}: ${r.amount.toLocaleString()} chips`).join(" · ") || game.feedback}</span>
                           {bestHero.length > 0 && <span>Your best five: {heroMadeHand}. Highlighted cards form your hand.</span>}
                         </div>
-                        <p>{game.feedback}</p>
+                        <div className="hand-coach-next">
+                          <div><strong>{handCoach.title}</strong><p>{handCoach.detail}</p><small>Suggested topic, not an automatic mistake grade.</small></div>
+                          <Link href={handCoach.href} className="hand-coach-link">{handCoach.action} →</Link>
+                        </div>
                         <button className="primary" onClick={next}>
                           {hero.chips === 0 ||
                           game.players.filter((p) => p.chips > 0).length < 2
