@@ -3,7 +3,6 @@ import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import WorkspaceLinks from "@/components/WorkspaceLinks";
-import BeginnerGuide from "@/components/BeginnerGuide";
 import EquityLab from "@/components/EquityLab";
 import Card from "@/components/Card";
 import TrainingHub from "@/components/TrainingHub";
@@ -174,10 +173,9 @@ export default function Home() {
         </header>
         <div className="page-content">
           <WorkspaceLinks current={tab === "Practice" ? "Play" : tab} />
-          {tab === "Practice" && <BeginnerGuide />}
-          <div className="page-heading">
+          <div className={`page-heading ${tab === "Practice" ? "practice-heading-compact" : ""}`}>
             <div>
-              <div className="eyebrow">A LITTLE PRACTICE. A BETTER PLAYER.</div>
+              {tab !== "Practice" && <div className="eyebrow">A LITTLE PRACTICE. A BETTER PLAYER.</div>}
               <h1>
                 {tab === "Practice"
                   ? "Take your seat."
@@ -189,13 +187,13 @@ export default function Home() {
                         ? "Explore poker probability."
                         : "Build your poker intuition."}
               </h1>
-              <p>
+              {tab !== "Practice" && <p>
                 {tab === "Practice"
                   ? "A focused space to think, play, and improve. No stakes attached."
                   : tab === "Dashboard"
                     ? "Every hand is another opportunity to learn."
                     : "Understand the fundamentals. Bring them to the table."}
-              </p>
+              </p>}
             </div>
             <div className="session-status">
               <span /> Training session{" "}
