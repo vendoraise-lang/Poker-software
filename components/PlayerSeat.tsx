@@ -3,9 +3,11 @@ import { position, type Game } from "@/lib/poker";
 export default function PlayerSeat({
   game,
   index: i,
+  highlightedCards,
 }: {
   game: Game;
   index: number;
+  highlightedCards?: Set<number>;
 }) {
   const p = game.players[i];
   const complete = game.street === "Showdown";
@@ -16,8 +18,8 @@ export default function PlayerSeat({
       <div className="seat-cards">
         {p.cards.length ? (
           p.cards.map((c, j) => (
+            <span key={j} className={highlightedCards ? highlightedCards.has(j) ? "best-five-card" : "non-best-card" : undefined}>
             <Card
-              key={j}
               card={c}
               small
               hidden={
@@ -29,6 +31,7 @@ export default function PlayerSeat({
                 )
               }
             />
+            </span>
           ))
         ) : (
           <span className="busted">Sitting out</span>
