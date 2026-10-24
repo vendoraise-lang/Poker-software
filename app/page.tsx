@@ -112,6 +112,8 @@ export default function Home() {
     isTurn = loaded && !restoreError && game.actor === 0;
   const bet = Math.min(l.max, Math.max(Math.min(l.min, l.max), amount));
   const canSize = isTurn && l.canRaise;
+  const legalMinimum = Math.min(l.min, l.max);
+  const amountStep = Math.max(10, Math.round(Math.max(20, pot * 0.1) / 10) * 10);
   const sizingPresets = game.currentBet > 0
     ? [2, 2.5, 3, 4].map((multiplier) => ({ label: `${multiplier}×`, amount: Math.round(game.currentBet * multiplier) }))
     : [0.25, 0.33, 0.5, 0.75, 1].map((fraction) => ({ label: `${Math.round(fraction * 100)}%`, amount: Math.ceil(pot * fraction) }));
@@ -357,6 +359,8 @@ export default function Home() {
                             {game.currentBet ? "Raise to" : "Bet"}{" "}
                             <b>{isTurn && l.canRaise ? bet : "—"}</b>
                           </label>
+                          <div className="bet-adjuster">
+                            <button type="button" className="bet-step" disabled={!canSize || bet <= legalMinimum} aria-label="Decrease bet" onClick={() => setLegalAmount(bet - amountStep)}>−</button>
                           <input
                             id="bet"
                             aria-label="Bet or raise total"
@@ -372,6 +376,9 @@ export default function Home() {
                             }
                             onChange={(e) => setAmount(Number(e.target.value))}
                           />
+                            <button type="button" className="bet-step" disabled={!canSize || bet >= l.max} aria-label="Increase bet" onClick={() => setLegalAmount(bet + amountStep)}>+</button>
+                          </div>
+                          <div className="bet-limits">{canSize ? `Min ${legalMinimum.toLocaleString()} · Max ${l.max.toLocaleString()}` : "Waiting for your turn"}</div>
                           <div className="quick-bets" aria-label="Quick bet sizes">
                             {sizingPresets.map((preset) => (
                               <button key={preset.label} type="button" disabled={!canSize}
@@ -387,7 +394,7 @@ export default function Home() {
                             disabled={!isTurn || !l.actions.includes("fold")}
                             onClick={() => play("fold")}
                           >
-                            Fold <small>Give up hand</small>
+                            Fold <small>Fold</small>
                           </button>
                           <button
                             disabled={!isTurn}
@@ -395,7 +402,7 @@ export default function Home() {
                           >
                             {l.call ? `Call ${l.call}` : "Check"}
                             <small>
-                              {l.call ? "Match the bet" : "Stay in for free"}
+                              {l.call ? `${Math.round((l.call / Math.max(1, pot + l.call)) * 100)}% pot odds` : "Free"}
                             </small>
                           </button>
                           <button
@@ -408,7 +415,7 @@ export default function Home() {
                             {game.currentBet ? "Raise to" : "Bet"}{" "}
                             {isTurn && l.canRaise ? bet : ""}
                             <small>
-                              Set the pace <span>↗</span>
+                              {bet === l.max && canSize ? "All in" : "Confirm"} <span>↗</span>
                             </small>
                           </button>
                         </div>
