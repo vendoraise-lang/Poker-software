@@ -274,12 +274,7 @@ export default function Home() {
                       {heroMadeHand && !hero.folded && (
                         <div className="live-hand-label" role="status">{heroMadeHand}</div>
                       )}
-                      {complete && (
-                        <div className={`showdown-banner ${heroWon ? "showdown-win" : ""}`} role="status" aria-live="polite">
-                          <strong>{heroWon ? "YOU WIN!" : "SHOWDOWN"}</strong>
-                          <span>{heroWon ? `${pot.toLocaleString()} chips awarded` : "Hand complete"}</span>
-                        </div>
-                      )}
+
                     </div>
                   </div>
                   <div className="action-area">
@@ -300,6 +295,10 @@ export default function Home() {
                     </div>
                     {complete ? (
                       <div className="hand-result">
+                        <div className={`showdown-summary ${heroWon ? "showdown-win" : ""}`} role="status" aria-live="polite">
+                          <strong>{heroWon ? "YOU WIN" : "HAND COMPLETE"}</strong>
+                          <span>{heroWon && heroMadeHand ? `${heroMadeHand} · ${pot.toLocaleString()} chips awarded` : game.feedback}</span>
+                        </div>
                         <p>{game.feedback}</p>
                         <button className="primary" onClick={next}>
                           {hero.chips === 0 ||
