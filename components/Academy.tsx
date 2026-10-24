@@ -120,6 +120,15 @@ export default function Academy() {
     [feedback, setFeedback] = useState<string | null>(null),
     [reviews, setReviews] = useState<ReviewData | null>(null);
   const storedSnapshot = useRef<string | null>(null);
+  const pendingLesson = useRef<string | null>(null);
+  useEffect(() => {
+    if (!pendingLesson.current || view !== "Lessons") return;
+    const target = document.getElementById(`academy-lesson-${pendingLesson.current}`);
+    if (!target) return;
+    pendingLesson.current = null;
+    target.scrollIntoView({ behavior: "instant", block: "start" });
+    target.focus({ preventScroll: true });
+  }, [moduleId, view]);
   useEffect(() => {
     const timer = setTimeout(() => {
       try {
@@ -261,9 +270,19 @@ export default function Academy() {
               <button
                 className="primary"
                 onClick={() => {
+                  pendingLesson.current = recommendation.lesson.id;
                   setModuleId(recommended.id);
                   setView("Lessons");
                   setFeedback(null);
+                  // Handle selecting the already-visible module, which may not rerender.
+                  if (moduleId === recommended.id && view === "Lessons") {
+                    const target = document.getElementById(`academy-lesson-${recommendation.lesson.id}`);
+                    if (target) {
+                      pendingLesson.current = null;
+                      target.scrollIntoView({ behavior: "instant", block: "start" });
+                      target.focus({ preventScroll: true });
+                    }
+                  }
                 }}
               >
                 Study recommended module
@@ -317,7 +336,7 @@ export default function Academy() {
                 </div>
                 {view === "Lessons" &&
                   currentModule.lessons.map((l) => (
-                    <section className="academy-lesson" key={l.id}>
+                    <section className="academy-lesson" key={l.id} id={`academy-lesson-${l.id}`} tabIndex={-1}>
                       <h3>{l.title}</h3>
                       <p>{l.text}</p>
                       <p className="teaching-note">{l.tryIt}</p>
