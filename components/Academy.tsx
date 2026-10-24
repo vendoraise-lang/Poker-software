@@ -103,7 +103,7 @@ function Exercise({
             {grade.accepted ? "Accepted reasoning" : "Let’s examine this"}
           </strong>
           <p>{grade.explanation}</p>
-          <small>{q.basis}</small>
+          <details className="academy-deep-dive"><summary>Why this answer?</summary><small>{q.basis}</small></details>
         </div>
       )}
     </article>
@@ -314,12 +314,11 @@ export default function Academy() {
               <section className="content-panel academy-module">
                 <span className="eyebrow">MODULE {currentModule.id}</span>
                 <h2>{currentModule.title}</h2>
-                <h3>Learning objectives</h3>
-                <ul>
+                <details className="academy-deep-dive"><summary>What you’ll learn</summary><ul>
                   {currentModule.objectives.map((o) => (
                     <li key={o}>{o}</li>
                   ))}
-                </ul>
+                </ul></details>
                 <div className="academy-tabs" aria-label="Module activities">
                   {["Lessons", "Practice", "Assessment"].map((t) => (
                     <button
@@ -338,8 +337,8 @@ export default function Academy() {
                   currentModule.lessons.map((l) => (
                     <section className="academy-lesson" key={l.id} id={`academy-lesson-${l.id}`} tabIndex={-1}>
                       <h3>{l.title}</h3>
-                      <p>{l.text}</p>
-                      <p className="teaching-note">{l.tryIt}</p>
+                      <p className="academy-lesson-summary">{l.tryIt}</p>
+                      <details className="academy-deep-dive"><summary>Read the full lesson</summary><p>{l.text}</p></details>
                       <Exercise
                         q={getQuestion(l.practiceId)}
                         session={0}
