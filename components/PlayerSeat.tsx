@@ -46,7 +46,7 @@ export default function PlayerSeat({
             {p.chips.toLocaleString()} <span>chips</span>
           </small>
         </div>
-        <span className="position">{position(game, i)}</span>
+        <span className={`position ${position(game, i) === "BTN" ? "dealer-position" : ""}`}>{position(game, i) === "BTN" ? "D" : position(game, i)}</span>
       </div>
       <div className="seat-caption">
         {p.folded
@@ -56,10 +56,10 @@ export default function PlayerSeat({
             : game.actor === i
               ? "Thinking…"
               : i === 0
-                ? "Your practice starts here"
+                ? "Ready"
                 : p.profile}
       </div>
-      {p.bet > 0 && (
+      {!complete && p.bet > 0 && (
         <div className="seat-bet">
           <span>▰</span> {p.bet}
         </div>
