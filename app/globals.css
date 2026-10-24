@@ -4049,3 +4049,13 @@ button:disabled {
 .hand-coach-link { display:inline-flex; align-items:center; justify-content:center; border:1px solid #91b783; padding:10px 12px; min-height:44px; border-radius:8px; background:#2b4831; color:#e2f3d7; font-weight:650; font-size:12px; }
 .hand-coach-link:hover {background:#355e3e}
 @media(max-width:760px) {.hand-coach-next {padding:9px;gap:7px}.hand-coach-next p {font-size:11px}.hand-coach-link {width:100%}}
+
+/* Step 8 — Awards are driven by engine results, not visual estimates. */
+.awarded-seat .seat-info { border-color:#e5ce79; box-shadow:0 0 0 2px #e5ce7955,0 0 19px #d5b95e3b; }
+.seat-award { display:inline-flex; position:absolute; z-index:9; left:50%; top:-22px; transform:translateX(-50%); white-space:nowrap; background:#293a29; color:#ffe7a0; border:1px solid #dec66e; border-radius:999px; padding:5px 10px; font-weight:800; font-size:11px; box-shadow:0 5px 14px #000a; animation:award-pop .7s ease-out both; }
+@keyframes award-pop { from { opacity:0; transform:translate(-50%,12px) scale(.8); } to {opacity:1;transform:translate(-50%,0) scale(1);} }
+@media(max-width:760px) {
+ .play-screen .seat-award {top:-12px;font-size:10px;padding:4px 7px;}
+ .play-screen .seat-0 .seat-award {top:-13px;}
+}
+@media(prefers-reduced-motion:reduce) {.seat-award {animation:none}}
