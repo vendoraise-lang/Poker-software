@@ -4103,3 +4103,13 @@ button:disabled {
  .play-screen .community .playing-card {width:31px;height:46px;}
  .play-screen .board-area {top:148px;}
 }
+
+/* Step 13: poker-client seat trim and dimensional chip details. */
+.play-screen .seat-info { background:linear-gradient(165deg,#25362f,#101a19 75%); border:1px solid #64816d; border-radius:12px; box-shadow:0 5px 12px #0009,inset 0 1px #ffffff15; }
+.play-screen .seat-info small span {opacity:.7}
+.play-screen .seat-caption {font-size:10px; letter-spacing:.02em}
+.play-screen .seat-bet {box-shadow:0 4px 9px #0009;gap:7px}
+.play-screen .seat-bet span {background:repeating-conic-gradient(#f5edd3 0 19deg,#b73e37 19deg 45deg);border:2px solid #f1e0b1;box-shadow:0 2px 0 #762f2b,0 3px 0 #f1e0b1,0 5px 0 #762f2b,0 7px 7px #0008}
+.play-screen .seat-bet strong {font-variant-numeric:tabular-nums}
+.play-screen .felt-wordmark {opacity:.26;pointer-events:none}
+@media(max-width:760px){.play-screen .seat-caption{display:none}.play-screen .seat-info{border-radius:10px}.play-screen .seat-bet span{width:13px;height:13px}}
