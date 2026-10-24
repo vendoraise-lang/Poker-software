@@ -3938,3 +3938,39 @@ button:disabled {
   .play-screen .table-scene { margin-bottom: 180px; }
   .play-screen .action-area { max-height: min(42dvh, 310px); }
 }
+
+/* At-table feedback and restrained celebration. */
+.live-hand-label {
+  position: absolute; top: 100%; margin-top: 8px;
+  border: 1px solid #b7d39e88; background: #13251eea; color:#e8f7db;
+  padding: 5px 14px; border-radius: 24px; font-size: 12px; font-weight:700;
+  white-space: nowrap;
+}
+.showdown-banner {
+  position:absolute; top: -52px; left:50%; transform:translateX(-50%);
+  z-index:8; display:flex; flex-direction:column; align-items:center;
+  padding:10px 24px; border:1px solid #8daf91; border-radius:12px;
+  background:#10221fee; box-shadow:0 6px 28px #000b;
+  color:#ebf4e5; white-space:nowrap; pointer-events:none;
+}
+.showdown-banner strong { font-size:20px; letter-spacing:2px; }
+.showdown-banner span { font-size:11px; }
+.showdown-win { border-color:#efda83; color:#ffe7a0; animation:win-appear .6s ease-out both; }
+@keyframes win-appear { from {opacity:0; transform:translate(-50%, -20px) scale(.9)} to {opacity:1; transform:translate(-50%,0) scale(1)} }
+@media(max-width:760px) {
+  .play-screen .live-hand-label { font-size:12px; }
+  .play-screen .showdown-banner { top:-43px; padding:6px 16px; }
+  .play-screen .showdown-banner strong {font-size:16px}
+}
+/* Academy: explanations remain available, but do not dominate mobile. */
+@media(max-width:760px) {
+ .academy-main .academy-lead { display:none; }
+ .academy-main .academy-stats { display:none; }
+ .academy-main .academy-next { padding:14px; gap:10px; }
+ .academy-main .academy-next h2 { font-size:20px; margin:5px 0; }
+ .academy-main .academy-next p { font-size:12px; margin:0; }
+ .academy-main .academy-modules { display:flex; flex-direction:row; overflow-x:auto; gap:8px; padding-bottom:8px; }
+ .academy-main .academy-modules button { min-width:165px; padding:10px; }
+ .academy-main .academy-modules button span { display:none; }
+}
+@media(prefers-reduced-motion:reduce){.showdown-win{animation:none}}
