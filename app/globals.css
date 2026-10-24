@@ -4067,3 +4067,11 @@ button:disabled {
 .play-screen .table-scene { animation:new-table-hand .35s ease-out both; }
 @media(max-width:760px){.table-last-action {padding:5px 12px;font-size:10px;min-height:28px}}
 @media(prefers-reduced-motion:reduce){.play-screen .table-scene{animation:none}}
+
+/* Step 11: tactile, readable bet sizing. */
+.bet-adjuster { display:flex; align-items:center; gap:10px; }
+.bet-adjuster input[type="range"] { flex:1; min-width:0; }
+.bet-step { flex:0 0 40px; width:40px; height:40px; border:1px solid #628369; border-radius:9px; background:#24432f; color:#eff6e7; font-size:22px; font-weight:800; }
+.bet-step:disabled { opacity:.4; cursor:not-allowed; }
+.bet-limits { font-size:11px; color:#a7bcae; text-align:center; margin:3px 0 6px; }
+@media(max-width:760px){.play-screen .bet-adjuster{gap:8px}.play-screen .bet-step{width:36px;height:36px;flex-basis:36px}.play-screen .bet-limits{font-size:10px;margin:1px 0 5px}}
