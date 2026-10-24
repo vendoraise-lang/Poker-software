@@ -4023,3 +4023,20 @@ button:disabled {
 .community > span { display:inline-flex; }
 .showdown-summary span { overflow-wrap:anywhere; }
 @media(max-width:760px){.best-five-card{box-shadow:0 0 0 2px #f1d16e,0 0 10px #f5d57066}}
+
+/* Step 5: concise, practice-first Academy cards. */
+.academy-lesson { scroll-margin-top:24px; }
+.academy-lesson-summary { color:#dbecd9; font-size:14px; line-height:1.5; }
+.academy-deep-dive { margin:9px 0 16px; border:1px solid #32483b; border-radius:9px; background:#15231d; padding:9px 12px; }
+.academy-deep-dive summary { cursor:pointer; color:#c6e4bc; font-size:13px; font-weight:600; }
+.academy-deep-dive[open] summary { margin-bottom:10px; }
+.academy-deep-dive p { margin:6px 0; }
+.academy-exercise h3 { font-size:19px; line-height:1.35; }
+.academy-exercise .eyebrow { letter-spacing:.8px; font-size:9px; }
+.academy-choices button { font-size:14px; min-height:48px; }
+@media(max-width:760px){
+ .academy-lesson { padding:12px 0; }
+ .academy-lesson h3 { font-size:20px; }
+ .academy-exercise { margin:10px 0; padding:14px; }
+ .academy-exercise h3 { font-size:17px; }
+}
