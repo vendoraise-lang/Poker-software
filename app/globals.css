@@ -3974,3 +3974,12 @@ button:disabled {
  .academy-main .academy-modules button span { display:none; }
 }
 @media(prefers-reduced-motion:reduce){.showdown-win{animation:none}}
+
+/* Showdown summary stays in controls; never overlays showdown cards or pot. */
+.showdown-summary { display:flex; flex-direction:column; gap:3px; padding:10px 14px; border-radius:10px; border:1px solid #58745b; background:#1a2a22; margin-bottom:8px; }
+.showdown-summary strong { font-size:18px; letter-spacing:1px; }
+.showdown-summary span { font-size:12px; color:#e5e9df; }
+.showdown-summary.showdown-win { color:#ffe5a2; border-color:#bca460; animation:result-in .5s ease-out both; }
+@keyframes result-in { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+@media (max-width:760px){.showdown-summary {padding:8px 10px}.showdown-summary strong {font-size:16px} .play-screen .hand-result {flex-wrap:wrap;}}
+@media (prefers-reduced-motion:reduce){.showdown-summary.showdown-win{animation:none}}
