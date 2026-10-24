@@ -3843,3 +3843,38 @@ button:disabled {
   .sidebar nav { display: none !important; }
   .sidebar-bottom { display: none; }
 }
+
+/* Mobile gameplay correctness: keep hole cards below the board and actions accessible. */
+@media (max-width: 760px) {
+  .play-screen > header { display: none; }
+  .play-screen .practice-heading-compact { display: none; }
+  .play-screen .workspace-links { margin-bottom: 8px !important; }
+  .play-screen .table-scene { height: 440px; }
+  .play-screen .felt { top: 65px; bottom: 76px; }
+  .play-screen .seat-0 { bottom: 11px; }
+  .play-screen .board-area { top: 163px; }
+  .play-screen .seat-0 .seat-cards { margin-bottom: 5px; }
+  .play-screen .table-panel { overflow: visible; padding-bottom: 220px; }
+  .play-screen .action-area {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    max-height: 42dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 10px 14px calc(12px + env(safe-area-inset-bottom));
+    background: #101b1bf7;
+    border: 1px solid #547456;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -8px 28px #000b;
+    backdrop-filter: blur(12px);
+  }
+  .play-screen .action-buttons button { min-height: 52px; }
+  .play-screen .action-buttons small { display: none; }
+  .play-screen .bet-sizing { padding: 7px 0 8px; }
+  .play-screen .turn-label { gap: 4px; flex-wrap: wrap; }
+  .play-screen .turn-label > span:last-child { margin-left: auto; }
+  .play-screen .training-panel { margin-top: 12px; }
+}
