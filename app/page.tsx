@@ -90,6 +90,13 @@ export default function Home() {
     pot = game.players.reduce((s, p) => s + p.total, 0),
     isTurn = loaded && !restoreError && game.actor === 0;
   const bet = Math.min(l.max, Math.max(Math.min(l.min, l.max), amount));
+  const canSize = isTurn && l.canRaise;
+  const sizingPresets = game.currentBet > 0
+    ? [2, 2.5, 3, 4].map((multiplier) => ({ label: `${multiplier}×`, amount: Math.round(game.currentBet * multiplier) }))
+    : [0.25, 0.33, 0.5, 0.75, 1].map((fraction) => ({ label: `${Math.round(fraction * 100)}%`, amount: Math.ceil(pot * fraction) }));
+  function setLegalAmount(candidate: number) {
+    setAmount(Math.min(l.max, Math.max(l.min, candidate)));
+  }
   function play(action: Action) {
     try {
       takeAction(
@@ -293,7 +300,7 @@ export default function Home() {
                       <>
                         <div className="bet-sizing">
                           <label htmlFor="bet">
-                            Bet / raise to{" "}
+                            {game.currentBet ? "Raise to" : "Bet"}{" "}
                             <b>{isTurn && l.canRaise ? bet : "—"}</b>
                           </label>
                           <input
@@ -311,28 +318,16 @@ export default function Home() {
                             }
                             onChange={(e) => setAmount(Number(e.target.value))}
                           />
-                          <div className="quick-bets">
-                            {[0.5, 1].map((n) => (
-                              <button
-                                key={n}
-                                disabled={!isTurn || !l.canRaise}
-                                onClick={() =>
-                                  setAmount(
-                                    game.currentBet + Math.ceil(pot * n),
-                                  )
-                                }
-                              >
-                                {n === 0.5 ? "½ pot" : "Pot"}
+                          <div className="quick-bets" aria-label="Quick bet sizes">
+                            {sizingPresets.map((preset) => (
+                              <button key={preset.label} type="button" disabled={!canSize}
+                                onClick={() => setLegalAmount(preset.amount)}
+                                title={`Set total bet or raise to ${Math.min(l.max, Math.max(l.min, preset.amount))}`}>
+                                {preset.label}
                               </button>
                             ))}
-                            <button
-                              disabled={!isTurn || !l.canRaise}
-                              onClick={() => setAmount(l.max)}
-                            >
-                              All-in
-                            </button>
-                          </div>
-                        </div>
+                            <button type="button" disabled={!canSize} onClick={() => setLegalAmount(l.max)}>All-in</button>
+                          </div>                 </div>
                         <div className="action-buttons">
                           <button
                             disabled={!isTurn || !l.actions.includes("fold")}
@@ -356,7 +351,7 @@ export default function Home() {
                               play(game.currentBet ? "raise" : "bet")
                             }
                           >
-                            {game.currentBet ? "Raise" : "Bet"}{" "}
+                            {game.currentBet ? "Raise to" : "Bet"}{" "}
                             {isTurn && l.canRaise ? bet : ""}
                             <small>
                               Set the pace <span>↗</span>
