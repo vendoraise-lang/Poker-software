@@ -263,16 +263,16 @@ export default function Home() {
                       </div>
                       <div className="community">
                         {Array.from({ length: 5 }, (_, i) => (
-                          <Card key={i} card={game.board[i]} />
+                          <Card key={`${game.hand}-${i}-${game.board[i] ? "dealt" : "empty"}`} card={game.board[i]} />
                         ))}
                       </div>
-                      <div className="street-tag">
+                      <div className="street-tag" key={`${game.hand}-${game.street}`}>
                         {game.street === "Showdown"
                           ? "HAND COMPLETE"
                           : game.street.toUpperCase()}
                       </div>
                       {heroMadeHand && !hero.folded && (
-                        <div className="live-hand-label" role="status">{heroMadeHand}</div>
+                        <div className="live-hand-label" role="status" aria-label={`Your current hand: ${heroMadeHand}`}>{heroMadeHand}</div>
                       )}
 
                     </div>
