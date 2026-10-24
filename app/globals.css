@@ -4075,3 +4075,31 @@ button:disabled {
 .bet-step:disabled { opacity:.4; cursor:not-allowed; }
 .bet-limits { font-size:11px; color:#a7bcae; text-align:center; margin:3px 0 6px; }
 @media(max-width:760px){.play-screen .bet-adjuster{gap:8px}.play-screen .bet-step{width:36px;height:36px;flex-basis:36px}.play-screen .bet-limits{font-size:10px;margin:1px 0 5px}}
+
+/* Step 12: mobile-first table geometry; controls no longer obscure hole cards. */
+@media (max-width:760px) {
+  .play-screen .table-panel { padding-bottom:12px; overflow:visible; }
+  .play-screen .table-scene { height:382px; margin-bottom:0; isolation:isolate; }
+  .play-screen .felt { top:62px; bottom:66px; left:6%; right:6%; }
+  .play-screen .seat-2 { top:5px; }
+  .play-screen .seat-1 { top:111px; left:2px; }
+  .play-screen .seat-3 { top:111px; right:2px; }
+  .play-screen .seat-0 { bottom:5px; }
+  .play-screen .board-area { top:146px; }
+  .play-screen .community { gap:3px; }
+  .play-screen .seat-1 .seat-bet { top:88px; right:-9px; }
+  .play-screen .seat-3 .seat-bet { top:88px; left:-9px; }
+  .play-screen .action-area {
+    position:relative; inset:auto; z-index:1; max-height:none;
+    overflow:visible; padding:10px 12px 12px;
+    border-radius:12px; box-shadow:none; backdrop-filter:none;
+  }
+  .play-screen .turn-label { font-size:12px; }
+  .play-screen .quick-bets {gap:5px;}
+  .play-screen .action-buttons { gap:7px; }
+}
+@media(max-width:380px) {
+ .play-screen .seat {width:93px;}
+ .play-screen .community .playing-card {width:31px;height:46px;}
+ .play-screen .board-area {top:148px;}
+}
