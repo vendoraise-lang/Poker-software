@@ -164,7 +164,7 @@ export default function Home() {
           </div>
         </div>
       </aside>
-      <main id="main-content" tabIndex={-1}>
+      <main id="main-content" tabIndex={-1} className={tab === "Practice" ? "play-screen" : undefined}>
         <header>
           <div className="breadcrumb">
             Workspace <span>/</span> <b>{tab}</b>
