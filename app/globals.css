@@ -3926,3 +3926,15 @@ button:disabled {
  .play-screen .quick-bets { gap:5px; }
  .play-screen .quick-bets button { min-width:39px; padding:5px 7px; font-size:11px; }
 }
+
+/* Keep final-street chips clear of the five community cards. */
+@media (max-width: 760px) {
+  .play-screen .seat-0 .seat-bet { top: -47px; left: 50%; }
+  .play-screen .seat-1 .seat-bet { top: 53px; right: -6px; left: auto; }
+  .play-screen .seat-2 .seat-bet { bottom: -33px; }
+  .play-screen .seat-3 .seat-bet { top: 53px; left: -6px; }
+  .play-screen .seat-0 .seat-caption { display: none; }
+  .play-screen .table-panel { padding-bottom: 0; }
+  .play-screen .table-scene { margin-bottom: 180px; }
+  .play-screen .action-area { max-height: min(42dvh, 310px); }
+}
