@@ -280,7 +280,11 @@ export default function Home() {
                       {String(game.hand).padStart(3, "0")}
                     </div>
                   </div>
-                  <div className="table-scene">
+                  <div className="table-last-action" role="status" aria-live="polite">
+                    <span className="action-indicator" aria-hidden="true" />
+                    <span>{game.log.at(-1) ?? "Blinds posted"}</span>
+                  </div>
+                  <div className="table-scene" key={`table-${game.hand}`}>
                     <div className="felt">
                       <div className="felt-inner" />
                       <span className="felt-wordmark">
@@ -342,7 +346,7 @@ export default function Home() {
                           {hero.chips === 0 ||
                           game.players.filter((p) => p.chips > 0).length < 2
                             ? "New session"
-                            : "Next hand"}{" "}
+                            : "Deal next hand"}{" "}
                           <span>→</span>
                         </button>
                       </div>
