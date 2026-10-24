@@ -3878,3 +3878,51 @@ button:disabled {
   .play-screen .turn-label > span:last-child { margin-left: auto; }
   .play-screen .training-panel { margin-top: 12px; }
 }
+
+/* Casino chip presentation: decorative markers; actual amounts remain engine-owned. */
+.seat-bet {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  background: #0b1b18ed;
+  border: 1px solid #668775;
+  border-radius: 999px;
+  padding: 4px 9px 4px 5px;
+  color: #f4e6bb;
+  z-index: 5;
+  box-shadow: 0 3px 10px #0009;
+}
+.seat-bet span {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  font-size: 0;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 3px dashed #eee5c9;
+  background: #ae3938;
+  box-shadow: 0 2px 0 #742626, 0 3px 2px #000b;
+}
+.pot-label b::before {
+  content:"";
+  display:inline-block;
+  width: 16px;
+  height:16px;
+  vertical-align: -3px;
+  margin-right:5px;
+  border:3px dashed #f0e8be;
+  background:#315eab;
+  border-radius:50%;
+  box-shadow:0 2px 0 #1e396b;
+}
+.quick-bets { flex-wrap:wrap; }
+.quick-bets button { min-width: 43px; color:#e0e8db; background:#1e3029; border:1px solid #51715e; font-weight:650; }
+.quick-bets button:hover:not(:disabled) { background:#35583f; }
+@media(max-width:760px) {
+ .play-screen .seat-bet { font-size:10px; padding:3px 5px; }
+ .play-screen .seat-bet span { width:11px; height:11px; border-width:2px; }
+ .play-screen .quick-bets { gap:5px; }
+ .play-screen .quick-bets button { min-width:39px; padding:5px 7px; font-size:11px; }
+}
