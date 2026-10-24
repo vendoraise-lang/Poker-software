@@ -113,6 +113,10 @@ export default function Home() {
     setError("");
   }
   const complete = game.street === "Showdown";
+  const heroMadeHand = hero.cards.length === 2 && game.board.length >= 3
+    ? ranks[evaluate([...hero.cards, ...game.board])[0]]
+    : null;
+  const heroWon = complete && /You receives [1-9][0-9]*/i.test(game.feedback);
   return (
     <div className="app-shell">
       <Suspense fallback={null}>
@@ -267,6 +271,15 @@ export default function Home() {
                           ? "HAND COMPLETE"
                           : game.street.toUpperCase()}
                       </div>
+                      {heroMadeHand && !hero.folded && (
+                        <div className="live-hand-label" role="status">{heroMadeHand}</div>
+                      )}
+                      {complete && (
+                        <div className={`showdown-banner ${heroWon ? "showdown-win" : ""}`} role="status" aria-live="polite">
+                          <strong>{heroWon ? "YOU WIN!" : "SHOWDOWN"}</strong>
+                          <span>{heroWon ? `${pot.toLocaleString()} chips awarded` : "Hand complete"}</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="action-area">
