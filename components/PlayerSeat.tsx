@@ -13,7 +13,7 @@ export default function PlayerSeat({
   const complete = game.street === "Showdown";
   return (
     <div
-      className={`seat seat-${i} ${game.actor === i ? "active-seat" : ""} ${p.folded ? "folded" : ""}`}
+      className={`seat seat-${i} ${game.actor === i ? "active-seat" : ""} ${p.folded ? "folded" : ""} ${complete && game.awards[i] > 0 ? "awarded-seat" : ""}`}
     >
       <div className="seat-cards">
         {p.cards.length ? (
@@ -62,6 +62,9 @@ export default function PlayerSeat({
                 ? "Ready"
                 : p.profile}
       </div>
+      {complete && game.awards[i] > 0 && (
+        <div className="seat-award" role="status">+{game.awards[i].toLocaleString()} chips</div>
+      )}
       {!complete && p.bet > 0 && (
         <div className="seat-bet">
           <span>▰</span> {p.bet}
