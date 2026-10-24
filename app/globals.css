@@ -3778,3 +3778,68 @@ button:disabled {
   .page-content { padding-top: 14px; }
   .workspace-simplified { margin-bottom: 12px !important; }
 }
+
+/* Casino room visual refresh. Only presentation is changed. */
+.table-panel { border: 1px solid #35463d; border-radius: 17px; box-shadow: 0 18px 46px #0006; }
+.table-scene {
+  background: radial-gradient(ellipse at 50% 48%, #203c33 0%, #111e21 65%, #0d141b 100%);
+}
+.felt {
+  border: 11px solid #3d3329;
+  background: radial-gradient(ellipse at 50% 40%, #26775b 0%, #195b45 60%, #103d32 100%);
+  box-shadow: 0 0 0 3px #71604b, 0 0 0 6px #151d20, 0 19px 32px #0009, inset 0 0 28px #0006;
+}
+.felt-inner { border: 1px solid #b5d0af3b; }
+.felt-wordmark { color: #dfefd21d; }
+.seat-info { background: #111a1df2; border-color: #45544d; border-radius: 11px; box-shadow: 0 6px 20px #0006; }
+.active-seat .seat-info { border-color: #c6e5a4; box-shadow: 0 0 0 2px #bfe59d35; }
+.seat-info b { font-size: 12px; font-weight: 650; }
+.position { background: #344438; color: #ebf4da; border-radius: 20px; padding: 4px 7px; font-size: 9px; }
+.seat-caption { color: #b6d1bf; }
+.pot-label { font-size: 10px; letter-spacing: 1px; padding: 7px 12px; border-radius: 20px; background: #081d18c7; border: 1px solid #a1c6aa40; color: #d0e8d4; }
+.pot-label b { font-size: 17px; color: #f5f5d8; }
+.street-tag { background: #0d2622d9; color: #c4e3cc; padding: 6px 12px; border-radius: 20px; border: 1px solid #b2d1b83b; }
+.playing-card:not(.card-back):not(:has(.empty-card)) { background: linear-gradient(145deg,#fffef8,#eae8db); border: 1px solid #bec7c0; box-shadow: 0 2px 6px #0006; }
+.card-back { border-color: #b7bba2; box-shadow: 0 2px 6px #0009; }
+.action-buttons button { border-radius: 12px; min-height: 55px; text-align: center; font-size: 15px; font-weight: 650; }
+.action-buttons button small { font-size: 10px; }
+.action-buttons .primary { background: linear-gradient(180deg,#d0efa9,#a9dc81); }
+.quick-bets button { min-height: 38px; border-radius: 8px; font-size: 11px; }
+@media(max-width:760px){
+  .page-content { padding-left: 12px; padding-right: 12px; }
+  .table-scene { height: 355px; }
+  .felt { top: 64px; bottom: 52px; left: 7%; right: 7%; border-width: 8px; }
+  .seat { width: 102px; }
+  .seat-0 { bottom: 3px; }
+  .seat-2 { top: 7px; }
+  .seat-1 { top: 112px; left: 2px; }
+  .seat-3 { top: 112px; right: 2px; }
+  .seat-info { padding: 5px; gap: 4px; }
+  .seat-info b { font-size: 10px; }
+  .seat-info small { font-size: 10px; }
+  .avatar { width: 23px; height: 23px; font-size: 12px; flex-shrink: 0; }
+  .position { padding: 3px 4px; font-size: 8px; }
+  .seat-caption { font-size: 9px; margin-top: 3px; }
+  .seat-cards { margin-bottom: 3px; }
+  .seat-0 .seat-cards .playing-card { width: 52px; height: 70px; font-size: 20px; }
+  .seat-0 .seat-cards .playing-card > span { font-size: 24px; }
+  .seat:not(.seat-0) .seat-cards .playing-card { width: 32px; height: 43px; padding: 4px; }
+  .board-area { top: 160px; }
+  .community { gap: 3px; }
+  .community .playing-card { width: 34px; height: 49px; padding: 4px; font-size: 15px; }
+  .community .playing-card > span { font-size: 18px; }
+  .pot-label { margin-bottom: 7px; font-size: 9px; padding: 4px 7px; }
+  .pot-label b { font-size: 14px; }
+  .street-tag { margin-top: 6px; }
+  .action-area { padding: 13px 12px 16px; }
+  .action-buttons { gap: 6px; }
+  .action-buttons button { padding: 10px 4px; font-size: 14px; min-height: 58px; }
+  .action-buttons small { font-size: 9px; }
+  .bet-sizing { flex-wrap: wrap; gap: 8px; padding: 10px 0; }
+  .bet-sizing input { flex: 1; min-width: 140px; }
+  .quick-bets { width: 100%; justify-content: flex-start; }
+  .table-toolbar { padding: 12px; }
+  .training-panel { margin-top: 10px; }
+  .sidebar nav { display: none !important; }
+  .sidebar-bottom { display: none; }
+}
