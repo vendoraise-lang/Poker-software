@@ -3699,3 +3699,71 @@ button:disabled {
   background: #3b492d;
   color: #eef5e4;
 }
+
+/* Streamlined navigation: core actions first, advanced tools on demand. */
+.workspace-links.workspace-simplified {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.workspace-primary { display: flex; flex-wrap: wrap; gap: 8px; }
+.workspace-primary a,
+.workspace-extra a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  padding: 10px 17px;
+  background: #18232a;
+  border: 1px solid #3b4b50;
+  color: #d4e2df;
+  font-size: 13px;
+}
+.workspace-primary a[aria-current="page"] {
+  background: #253d2d;
+  border-color: #8fbc81;
+  color: #e5f6d7;
+}
+.workspace-more { position: relative; }
+.workspace-more summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 9px;
+  border: 1px solid #3b4b50;
+  color: #d4e2df;
+  list-style: none;
+}
+.workspace-more summary::-webkit-details-marker { display:none; }
+.workspace-more summary::after { content:"⌄"; margin-left: 10px; }
+.workspace-extra {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 20;
+  width: 210px;
+  padding: 8px;
+  display: grid;
+  gap: 6px;
+  background: #111b1b;
+  border: 1px solid #3b4b50;
+  border-radius: 12px;
+  box-shadow: 0 15px 35px #0008;
+}
+.workspace-extra a { justify-content: flex-start; }
+.workspace-extra a:hover, .workspace-primary a:hover { background: #294035; }
+.academy-stats { margin-top: 12px; }
+@media (max-width: 760px) {
+  .workspace-links.workspace-simplified { display: block !important; }
+  .workspace-primary { display:grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; }
+  .workspace-primary a { padding: 10px 3px; font-size: 12px; }
+  .workspace-more { margin-top: 9px; }
+  .workspace-more summary { width: max-content; }
+  .workspace-extra { left: 0; right: auto; }
+  .academy-stats { display: none; }
+  .academy-lead { max-width: 60ch; }
+}
