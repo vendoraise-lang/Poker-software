@@ -59,15 +59,15 @@ export default function PlayerSeat({
             : game.actor === i
               ? "Thinking…"
               : i === 0
-                ? "Ready"
-                : p.profile}
+                ? "Your turn"
+                : "In hand"}
       </div>
       {complete && game.awards[i] > 0 && (
         <div className="seat-award" role="status">+{game.awards[i].toLocaleString()} chips</div>
       )}
       {!complete && p.bet > 0 && (
         <div className="seat-bet">
-          <span>▰</span> {p.bet}
+          <span aria-hidden="true" /> <strong>{p.bet.toLocaleString()}</strong>
         </div>
       )}
     </div>
