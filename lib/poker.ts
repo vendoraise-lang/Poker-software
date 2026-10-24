@@ -367,39 +367,52 @@ export function settle(g: Game) {
   g.log.push(g.feedback);
 }
 export function botAction(g: Game): { action: Action; amount?: number } {
-  const p = g.players[g.actor],
-    l = legal(g),
-    r = random(g.seed + g.log.length * 7919)();
+  const p = g.players[g.actor];
+  const l = legal(g);
+  if (!l.actions.length) throw Error("Bot has no legal action");
+  const rng = random(g.seed + g.hand * 1013 + g.log.length * 7919);
+  const roll = rng();
   const [a, b] = p.cards;
-  const strength = g.board.length
-    ? evaluate([...p.cards, ...g.board])[0] / 8 + 0.22
-    : (Math.max(a.rank, b.rank) / 14) * 0.35 +
-      (a.rank === b.rank ? 0.4 : 0) +
-      (a.suit === b.suit ? 0.1 : 0);
-  const aggressive = p.profile === "Loose-aggressive";
+  const pot = g.players.reduce((sum, player) => sum + player.total, 0);
+  const callPrice = l.call / Math.max(1, pot + l.call);
+  const pos = position(g, g.actor);
+  const late = pos === "BTN" || pos === "BB" || pos === "BTN / SB";
   const tight = p.profile !== "Loose-aggressive";
-  if (l.call && tight && strength < 0.36 && r < 0.75) return { action: "fold" };
-  if (
-    l.canRaise &&
-    r < (aggressive ? 0.48 : p.profile === "Tight-aggressive" ? 0.26 : 0.06) &&
-    (!tight || strength > 0.4)
-  ) {
-    return {
-      action: g.currentBet ? "raise" : "bet",
-      amount: Math.min(
-        l.max,
-        Math.max(
-          l.min,
-          g.currentBet +
-            Math.max(
-              20,
-              Math.floor(
-                (g.players.reduce((s, p) => s + p.total, 0) * 0.55) / 10,
-              ) * 10,
-            ),
-        ),
-      ),
-    };
+  const aggressive = p.profile !== "Tight-passive";
+
+  // Approximate decision score, not equity or a GTO assessment.
+  const high = Math.max(a.rank, b.rank);
+  const low = Math.min(a.rank, b.rank);
+  const gap = high - low;
+  const preflop = Math.min(0.95,
+    (high + low) / 36 +
+    (a.rank === b.rank ? 0.32 + high / 70 : 0) +
+    (a.suit === b.suit ? 0.08 : 0) +
+    (gap <= 2 ? 0.045 : 0) +
+    (late ? 0.055 : 0));
+  const made = g.board.length >= 3
+    ? evaluate([...p.cards, ...g.board])[0]
+    : 0;
+  const strength = g.board.length >= 3
+    ? Math.min(0.97, preflop * 0.24 + [0.12,0.40,0.57,0.70,0.80,0.88,0.94,0.97,0.99][made])
+    : preflop;
+
+  const threshold = (tight ? 0.48 : 0.33) + Math.min(0.22, callPrice * 0.60);
+  if (l.call && strength < threshold && roll < (tight ? 0.90 : 0.64)) {
+    return { action: "fold" };
+  }
+
+  const raiseChance = p.profile === "Loose-aggressive" ? 0.47
+    : p.profile === "Tight-aggressive" ? 0.34 : 0.09;
+  if (l.canRaise && strength > (tight ? 0.48 : 0.34) &&
+      roll < raiseChance + (strength > 0.75 ? 0.22 : 0)) {
+    const proposed = g.currentBet === 0
+      ? Math.max(20, Math.round(pot * (strength > 0.7 ? 0.7 : 0.45)))
+      : g.currentBet + Math.max(g.minRaise, Math.round(pot * (aggressive ? 0.65 : 0.4)));
+    const amount = Math.min(l.max, Math.max(l.min, proposed));
+    if (amount > g.currentBet && (amount >= l.min || amount === l.max)) {
+      return { action: g.currentBet ? "raise" : "bet", amount };
+    }
   }
   return { action: l.call ? "call" : "check" };
 }
