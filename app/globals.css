@@ -4338,3 +4338,7 @@ button:disabled {
 .bootcamp-next a{border:1px solid #718f7c;color:#e7ecdd;background:#264036}.bootcamp-next button{border:1px solid #e8daab;background:#d9e6b8;color:#14241b}
 .bootcamp-footnote{font-size:12px;color:#90a9a0;margin:23px 0}
 @media(max-width:680px){.bootcamp-screen{padding:12px}.bootcamp-head{padding:24px 4px 16px}.bootcamp-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.bootcamp-steps button{padding:10px;min-height:69px}.bootcamp-steps button strong{font-size:12px}.bootcamp-lesson{padding:16px}.bootcamp-lesson h2{font-size:22px}.bootcamp-next{flex-direction:column}.bootcamp-next a,.bootcamp-next button{width:100%}}
+
+.casino-learn-entry{display:flex;justify-content:space-between;align-items:center;gap:10px;text-decoration:none;padding:13px 17px;margin:4px 0 16px;border:1px solid #a68a51;border-radius:12px;background:linear-gradient(95deg,#27372b,#162c29);color:#f9f1d2}
+.casino-learn-entry span:first-child{display:grid;gap:3px}.casino-learn-entry strong{font-size:13px}.casino-learn-entry small{font-size:11px;color:#c2d3ba}.casino-learn-entry>span:last-child{font-size:12px;white-space:nowrap;font-weight:800;color:#eed58e}
+@media(max-width:650px){.casino-learn-entry{padding:10px;gap:7px}.casino-learn-entry strong{font-size:12px}.casino-learn-entry small{font-size:10px}.casino-learn-entry>span:last-child{font-size:11px}}
