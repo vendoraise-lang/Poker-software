@@ -4113,3 +4113,9 @@ button:disabled {
 .play-screen .seat-bet strong {font-variant-numeric:tabular-nums}
 .play-screen .felt-wordmark {opacity:.26;pointer-events:none}
 @media(max-width:760px){.play-screen .seat-caption{display:none}.play-screen .seat-info{border-radius:10px}.play-screen .seat-bet span{width:13px;height:13px}}
+
+/* Step 14: contextual table action labels. */
+.seat-action-bubble { position:absolute; left:50%; top:-35px; transform:translateX(-50%); z-index:11; padding:5px 9px; border-radius:9px; border:1px solid #b8d2ac; background:#162a21f5; box-shadow:0 4px 12px #0009; color:#ecf6e6; font-size:11px; font-weight:750; white-space:nowrap; text-transform:capitalize; animation:seat-action-appear .25s ease-out both; pointer-events:none; }
+@keyframes seat-action-appear {from{opacity:0;transform:translate(-50%,6px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(max-width:760px){.play-screen .seat-action-bubble{font-size:10px;padding:4px 6px;top:-25px}.play-screen .seat-0 .seat-action-bubble{top:-29px}}
+@media(prefers-reduced-motion:reduce){.seat-action-bubble{animation:none}}
