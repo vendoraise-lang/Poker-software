@@ -4342,3 +4342,8 @@ button:disabled {
 .casino-learn-entry{display:flex;justify-content:space-between;align-items:center;gap:10px;text-decoration:none;padding:13px 17px;margin:4px 0 16px;border:1px solid #a68a51;border-radius:12px;background:linear-gradient(95deg,#27372b,#162c29);color:#f9f1d2}
 .casino-learn-entry span:first-child{display:grid;gap:3px}.casino-learn-entry strong{font-size:13px}.casino-learn-entry small{font-size:11px;color:#c2d3ba}.casino-learn-entry>span:last-child{font-size:12px;white-space:nowrap;font-weight:800;color:#eed58e}
 @media(max-width:650px){.casino-learn-entry{padding:10px;gap:7px}.casino-learn-entry strong{font-size:12px}.casino-learn-entry small{font-size:10px}.casino-learn-entry>span:last-child{font-size:11px}}
+
+/* Casino school: clear path from short practice to full poker table. */
+.bootcamp-casino-link{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 18px;margin-top:12px;border-radius:11px;border:1px solid #e2ca8d;background:#e5d09a;color:#1b271f;font-size:14px;font-weight:800;text-decoration:none}
+.bootcamp-casino-link:hover{background:#ffe3a7}
+@media(max-width:760px){.bootcamp-casino-link{width:100%}.workspace-primary{grid-template-columns:repeat(5,minmax(0,1fr))}.workspace-primary a{font-size:11px;padding:12px 3px}}
