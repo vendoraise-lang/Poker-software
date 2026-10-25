@@ -4394,3 +4394,23 @@ button:disabled {
 }
 @media(max-width:370px){.pc-seat{width:94px}.pc-board .playing-card{width:33px;height:49px}.pc-seat-0{width:120px}}
 @media(prefers-reduced-motion:reduce){.pc-room *{animation:none!important}}
+
+/* Advanced Academy: structured study, quick questions, high-contrast feedback */
+.advanced-school{max-width:1160px;margin:20px auto 34px;padding:20px;color:#ecf2e7;background:#0d181d;border:1px solid #36554c;border-radius:18px}
+.advanced-intro{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:26px;border-radius:14px;background:linear-gradient(115deg,#15372d,#18252e);border:1px solid #446955}
+.advanced-intro>div:first-child>span,.advanced-content header>span,.advanced-question>small{font-size:10px;letter-spacing:1.8px;color:#e3c681;font-weight:850}
+.advanced-intro h2{font-size:clamp(23px,3vw,35px);color:#fff6dd;margin:10px 0}.advanced-intro p{font-size:14px;line-height:1.6;color:#c0d6cb;max-width:660px}
+.advanced-stats{display:grid;grid-template-columns:1fr;gap:3px;min-width:130px;text-align:center}.advanced-stats b{font-size:26px;color:#efdaa2}.advanced-stats small{font-size:10px;color:#b0c8bb;margin-bottom:8px}
+.advanced-track{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:16px 0}
+.advanced-track button{text-align:left;background:#15252a;color:#e1ede1;border:1px solid #37554c;border-radius:11px;padding:14px;min-height:102px}
+.advanced-track button.chosen{background:#254e3c;border-color:#d8b46d;box-shadow:inset 0 0 0 1px #cba860}
+.advanced-track button small,.advanced-track button span{display:block;font-size:10px;color:#d6ba7d}.advanced-track button strong{display:block;font-size:13px;margin:8px 0;color:#f0f4ec}.advanced-track button span{color:#9bc6ac}
+.advanced-content{border:1px solid #3a5850;border-radius:15px;background:#14252a;padding:25px}.advanced-content header h3{font-size:26px;color:#f9f0d9;margin:8px 0}.advanced-content header p{font-size:13px;color:#b9cec4}
+.advanced-question{border-top:1px solid #3a5651;margin-top:22px;padding-top:23px}.advanced-question h4{font-size:18px;color:#f1f4e7;margin:11px 0 15px;line-height:1.4}
+.advanced-answers{display:grid;grid-template-columns:1fr;gap:8px}.advanced-answers button{text-align:left;font-size:13px;min-height:48px;padding:12px 15px;border:1px solid #577165;border-radius:9px;color:#e8efe6;background:#203a34}
+.advanced-answers button.right{background:#285e43;border-color:#a5d994}.advanced-answers button.wrong{background:#543235;border-color:#e0a49a}.advanced-answers button:disabled:not(.right):not(.wrong){opacity:.57}
+.advanced-explainer{margin-top:11px;padding:13px 16px;border-radius:9px;border-left:3px solid #e8cc89;background:#1e352d}.advanced-explainer strong{font-size:13px;color:#f8e2ad}.advanced-explainer p{font-size:13px;line-height:1.6;margin:7px 0 0;color:#d8e7d9}
+.advanced-next{display:flex;justify-content:space-between;gap:12px;margin-top:23px}.advanced-next button{padding:11px 18px;border:1px solid #769b80;background:#304a3c;color:#f0f2de;border-radius:9px}.advanced-next button:disabled{opacity:.32}
+.advanced-resources{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.advanced-resources a{padding:11px 14px;border-radius:9px;border:1px solid #728f76;color:#e9ead1;background:#20372f;font-size:12px;text-decoration:none}
+.advanced-disclaimer{color:#8eaba0;font-size:11px;line-height:1.5}
+@media(max-width:760px){.advanced-school{margin:10px;padding:10px;border-radius:12px}.advanced-intro{padding:18px;display:block}.advanced-stats{display:flex;gap:8px;align-items:center;justify-content:flex-start;text-align:left}.advanced-stats b{font-size:16px}.advanced-stats small{margin:0 12px 0 0}.advanced-track{display:flex;overflow-x:auto;padding-bottom:6px}.advanced-track button{min-width:175px;padding:11px}.advanced-content{padding:15px}.advanced-content header h3{font-size:21px}.advanced-question h4{font-size:16px}.advanced-next button{padding:10px;font-size:12px}}
