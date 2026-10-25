@@ -306,12 +306,12 @@ export default function Home() {
                           <span key={`${game.hand}-${i}-${game.board[i] ? "dealt" : "empty"}`} className={bestHero.length && heroBestBoard.has(i) ? "best-five-card" : bestHero.length ? "non-best-card" : undefined}><Card card={game.board[i]} /></span>
                         ))}
                       </div>
-                      <div className="street-tag" key={`${game.hand}-${game.street}`}>
+                      <div className={`street-tag ${complete ? "street-complete" : ""}`} key={`${game.hand}-${game.street}`}>
                         {game.street === "Showdown"
                           ? "HAND COMPLETE"
                           : game.street.toUpperCase()}
                       </div>
-                      {heroMadeHand && !hero.folded && (
+                      {heroMadeHand && !hero.folded && !complete && (
                         <div className="live-hand-label" role="status" aria-label={`Your current hand: ${heroMadeHand}`}>{heroMadeHand}</div>
                       )}
 
@@ -338,12 +338,13 @@ export default function Home() {
                         <div className={`showdown-summary ${heroWon ? "showdown-win" : ""}`} role="status" aria-live="polite">
                           <strong>{heroWon ? "YOU RECEIVE CHIPS" : "HAND COMPLETE"}</strong>
                           <span>{recipients.map(r => `${r.name}: ${r.amount.toLocaleString()} chips`).join(" · ") || game.feedback}</span>
-                          {bestHero.length > 0 && <span>Your best five: {heroMadeHand}. Highlighted cards form your hand.</span>}
+                          {bestHero.length > 0 && <span>{heroMadeHand} · Best five highlighted in gold</span>}
                         </div>
-                        <div className="hand-coach-next">
-                          <div><strong>{handCoach.title}</strong><p>{handCoach.detail}</p><small>Suggested topic, not an automatic mistake grade.</small></div>
+                        <details className="hand-coach-next">
+                          <summary>Review hand · {handCoach.title}</summary>
+                          <p>{handCoach.detail}</p>
                           <Link href={handCoach.href} className="hand-coach-link">{handCoach.action} →</Link>
-                        </div>
+                        </details>
                         <button className="primary" onClick={next}>
                           {hero.chips === 0 ||
                           game.players.filter((p) => p.chips > 0).length < 2
