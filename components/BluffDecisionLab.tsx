@@ -15,7 +15,7 @@ function compute(s:Spot){const f=s.fold/100,e=s.equity/100;return f*s.pot+(1-f)*
 export default function BluffDecisionLab(){
  const [index,setIndex]=useState(0),[guess,setGuess]=useState<boolean|null>(null),[correct,setCorrect]=useState(0),[done,setDone]=useState(0);
  const s=spots[index],ev=compute(s),good=ev>0;
- const folds=s.fold,called=100-fold,winWhenCalled=called*s.equity/100,loseWhenCalled=called*(100-s.equity)/100;
+ const folds=s.fold,called=100-folds,winWhenCalled=called*s.equity/100,loseWhenCalled=called*(100-s.equity)/100;
  const foldGains=folds*s.pot/100,calledWins=winWhenCalled*(s.pot+s.bet)/100,calledLosses=loseWhenCalled*s.bet/100;
  const pureThreshold=Math.round(s.bet/(s.pot+s.bet)*1000)/10;
  function choose(v:boolean){if(guess!==null)return;setGuess(v);setDone(x=>x+1);if(v===good)setCorrect(x=>x+1)}
