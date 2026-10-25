@@ -3,6 +3,7 @@ import Link from "next/link";
 export default function WorkspaceLinks({ current }: { current?: string }) {
   const groups = [
     { label: "Play", href: "/?workspace=Practice", selected: current === "Play" || current === "Practice" },
+    { label: "Start learning", href: "/bootcamp", selected: current === "Bootcamp" },
     { label: "Train", href: "/?workspace=Train", selected: current === "Train" || current === "Academy" || current === "Learn" },
     { label: "Analyze", href: "/review", selected: current === "Review" || current === "Equity" },
     { label: "Progress", href: "/?workspace=Dashboard", selected: current === "Dashboard" },
@@ -19,6 +20,7 @@ export default function WorkspaceLinks({ current }: { current?: string }) {
         <div className="workspace-extra">
           <Link href="/bootcamp">30-minute training plan</Link>
           <Link href="/academy">Academy</Link>
+          <Link href="/bootcamp">30-minute lesson</Link>
           <Link href="/?workspace=Equity">Equity calculator</Link>
           <Link href="/review">Hand review</Link>
           <Link href="/?workspace=Learn">Quick lessons</Link>
