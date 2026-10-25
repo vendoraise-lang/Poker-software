@@ -1,0 +1,22 @@
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+
+const drills = [
+ {stage:"01 / 05",time:"0–5 min",title:"Position before cards",hint:"You are first to act (UTG) with 7♣ 2♦ at a full table. Everyone has roughly 100 big blinds.",options:["Open-raise","Fold","Call the big blind"],correct:1,why:"Weak disconnected offsuit hands are poor early-position opens. Enter pots selectively when many players can act behind you.",lesson:"Position and starting hands"},
+ {stage:"02 / 05",time:"5–10 min",title:"Learn the price",hint:"The pot is 80 chips. Your opponent bets 40. It costs you 40 to call. What minimum equity is needed to break even on a call?",options:["25%","33.3%","50%"],correct:0,why:"After their bet and your call, the final pot is 160. You invest 40 to contest 160, so 40 / 160 = 25%. Future action can change the decision.",lesson:"Pot odds"},
+ {stage:"03 / 05",time:"10–15 min",title:"Read your hand",hint:"Your hole cards: A♠ K♠. Board: K♦ 7♣ 2♥ 9♠ Q♦. What is your made hand?",options:["High card","One pair (Kings)","Two pair"],correct:1,why:"Your best five cards contain K♠? No: your king is K♠ and the board has K♦. Those two kings make one pair, with A, Q and 9 kickers.",lesson:"Hand rankings"},
+ {stage:"04 / 05",time:"15–20 min",title:"Manage the pot",hint:"You have a medium-strength one-pair hand out of position. A passive opponent bets big on the river. What is the best first step?",options:["Always call","Always raise","Compare pot odds with the opponent’s likely value hands and bluffs"],correct:2,why:"A big river bet needs a range-based decision. Compare the price, blockers and previous actions instead of treating any pair as an automatic call.",lesson:"River decisions"},
+ {stage:"05 / 05",time:"20–25 min",title:"Think in ranges",hint:"A tight early-position player opens. You have A♣ J♦ in a difficult seat with players left to act. What's the useful question?",options:["Do I beat random cards?","How does AJo perform against that player’s opening range and remaining opponents?","Did I win with AJo last time?"],correct:1,why:"Decisions should reflect position and estimated ranges, not just absolute hand strength or a previous result.",lesson:"Range thinking"}
+];
+export default function StartPage(){
+ const [step,setStep]=useState(0);
+ const [answers,setAnswers]=useState<Record<number,number>>({});
+ const d=drills[step], picked=answers[step], complete=step===drills.length-1 && picked!==undefined;
+ return <main className="bootcamp-page">
+  <header className="bootcamp-header"><Link href="/" className="bootcamp-brand">♠ POKERLAB <span>CASINO ACADEMY</span></Link><Link href="/?workspace=Practice">Play table ↗</Link></header>
+  <section className="bootcamp-hero"><span className="bootcamp-kicker">YOUR FIRST SESSION</span><h1>Start playing smarter<br/><em>in 30 minutes.</em></h1><p>Five real poker decisions, immediate feedback, then five minutes applying them at the practice table. No walls of theory.</p><div className="bootcamp-meter"><span style={{width:`${((step+(picked!==undefined?1:0))/drills.length)*100}%`}} /></div><small>Decision {step+1} of 5 · {d.time} · Play-money training</small></section>
+  <section className="bootcamp-drill" key={step}><div className="bootcamp-drill-top"><span>{d.stage}</span><span>{d.time}</span></div><h2>{d.title}</h2><p>{d.hint}</p><div className="bootcamp-options">{d.options.map((o,i)=><button key={i} disabled={picked!==undefined} className={picked!==undefined && i===d.correct?"correct":picked===i?"incorrect":""} onClick={()=>setAnswers(a=>({...a,[step]:i}))}><span>{String.fromCharCode(65+i)}</span>{o}</button>)}</div>{picked!==undefined&&<div className="bootcamp-explainer" role="status"><strong>{picked===d.correct?"Correct decision":"Here's the better approach"}</strong><p>{d.why}</p><small>Skill: {d.lesson}</small></div>}<div className="bootcamp-footer">{step>0&&<button onClick={()=>setStep(x=>x-1)} className="bootcamp-secondary">Previous</button>}{picked!==undefined && (complete?<Link className="bootcamp-next" href="/?workspace=Practice">Practice at the table →</Link>:<button className="bootcamp-next" onClick={()=>setStep(x=>x+1)}>Next decision →</button>)}</div></section>
+  <section className="bootcamp-next-section"><strong>After the 25-minute lesson</strong><p>Play five minutes of no-limit Hold’em. Observe position, estimate pot odds before calling, and name your made hand on the flop. Then explore the full Academy to practice more.</p><Link href="/academy">Explore full Academy →</Link></section>
+ </main>
+}
