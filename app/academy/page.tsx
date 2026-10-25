@@ -1,4 +1,3 @@
 import Academy from "@/components/Academy";
-export default function Page() {
-  return <Academy />;
-}
+import AdvancedAcademy from "@/components/AdvancedAcademy";
+export default function Page() {return <><AdvancedAcademy/><Academy/></>;}
