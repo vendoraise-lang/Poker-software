@@ -44,7 +44,6 @@ export default function Home() {
   const {
     game,
     progress,
-    session,
     loaded,
     storageError,
     restoreError,
