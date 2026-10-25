@@ -4491,3 +4491,17 @@ main.academy-new-page{margin:0!important;width:100%!important;max-width:none;min
 .sp-header{height:auto!important;display:block!important;border:0!important;padding:0!important}.sp-header span,.sp-caption{font-size:10px;font-weight:800;letter-spacing:1.5px;color:#e9d093}.sp-header h2{font-size:clamp(23px,3vw,34px);line-height:1.2;margin:11px 0;color:#fff0ce}.sp-header p{font-size:13px;line-height:1.6;color:#b8d0c3}
 .sp-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:15px;margin-top:19px}.sp-panel{border:1px solid #466456;background:#1b332f;padding:20px;border-radius:12px}.sp-panel h3{font-size:17px;color:#f4e8c8;margin:22px 0 9px}.sp-panel p{font-size:13px;line-height:1.65;color:#ceddcf}.sp-panel a{display:inline-flex;text-decoration:none;background:#d6e7b8;color:#1c3024;border-radius:8px;padding:11px;font-size:12px;font-weight:800}.sp-metrics{display:flex;gap:14px;margin-top:15px}.sp-metrics div{min-width:100px;background:#142923;border:1px solid #4d6d56;border-radius:9px;padding:13px}.sp-metrics strong{display:block;font-size:27px;color:#e3d099}.sp-metrics small{font-size:11px;color:#c0d3c3}.sp-routine{border-top:1px solid #4e6a5f;margin-top:20px}.sp-panel label{font-size:12px;color:#d4e5d6;display:block;margin-top:12px}.sp-panel select,.sp-panel textarea{display:block;width:100%;min-width:0;box-sizing:border-box;color:#f1f5e9;background:#101e21;border:1px solid #668578;border-radius:8px;padding:11px;margin-top:6px;font:inherit;font-size:13px}.sp-panel>button{background:#d8e5b2;color:#1c2d22;border:1px solid #e5f0c6;border-radius:9px;padding:13px 17px;font-weight:800;margin-top:13px}.sp-panel>button:disabled{opacity:.5}.sp-history{margin-top:15px;padding:14px;border-radius:10px;border:1px solid #4d6c59;color:#e7e7c8}.sp-history>summary{cursor:pointer;font-weight:700}.sp-history article{padding:12px 0;border-bottom:1px solid #455b52}.sp-history article p{font-size:12px;line-height:1.4;color:#bfd1c5}
 @media(max-width:760px){.sp-shell{padding:12px;margin:12px auto}.sp-grid{grid-template-columns:1fr}.sp-panel{padding:14px}.sp-metrics div{flex:1}}
+
+/* Explain decisions before formulas: beginner-friendly Bluff Lab */
+.bluff-words{margin:17px 0;background:#152b28;border:1px solid #608476;border-radius:10px;padding:15px 17px;color:#dceadf;font-size:14px;line-height:1.75}
+.bluff-words strong{display:block;color:#f4dd9e;margin-bottom:5px}
+.bluff-feedback h3{font-size:19px;margin:17px 0;color:#f6e4b4}
+.bluff-steps{padding-left:23px;display:grid;gap:15px;margin:16px 0 20px}
+.bluff-steps li{color:#e6f0e5;font-size:14px;line-height:1.7;padding-left:4px}
+.bluff-steps b{color:#ffdf9f}
+.bluff-math-line{display:grid;gap:5px;padding:12px 15px;margin:10px 0;background:#15372d;border:1px solid #577c68;border-radius:9px;font-variant-numeric:tabular-nums}
+.bluff-math-line span{display:block}
+.bluff-example{padding:14px 16px;background:#294b3a;border-radius:9px;color:#f5edd2;line-height:1.65;font-size:14px;margin:15px 0}
+.bluff-feedback details{margin:14px 0;color:#d2e7d6;font-size:13px;line-height:1.6}
+.bluff-feedback summary{cursor:pointer;font-weight:750}
+@media(max-width:760px){.bluff-words{font-size:13px;padding:12px}.bluff-steps{gap:12px;padding-left:19px}.bluff-steps li{font-size:13px}.bluff-feedback h3{font-size:17px}}
