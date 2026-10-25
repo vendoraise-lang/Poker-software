@@ -4505,3 +4505,16 @@ main.academy-new-page{margin:0!important;width:100%!important;max-width:none;min
 .bluff-feedback details{margin:14px 0;color:#d2e7d6;font-size:13px;line-height:1.6}
 .bluff-feedback summary{cursor:pointer;font-weight:750}
 @media(max-width:760px){.bluff-words{font-size:13px;padding:12px}.bluff-steps{gap:12px;padding-left:19px}.bluff-steps li{font-size:13px}.bluff-feedback h3{font-size:17px}}
+
+/* Beginner lessons across Academy: guide before exercise */
+.advanced-content .beginner-guide,.academy-lesson .beginner-guide{display:block!important;height:auto!important;max-width:100%;background:#17312c;color:#eef3e7;border:1px solid #6b8c75;border-radius:12px;padding:20px;margin:14px 0 24px;line-height:1.7}
+.beginner-guide>span{display:block;font-weight:800;letter-spacing:1px;font-size:11px;color:#efd79e}
+.beginner-guide h3{font-size:23px;margin:10px 0;color:#fff2cb}
+.beginner-guide h4{font-size:16px;margin:15px 0 8px;color:#ebdda8}
+.beginner-guide p,.beginner-guide li{font-size:14px;line-height:1.7;color:#e6eee5}
+.beginner-guide b{color:#f5dfaa}
+.beginner-worked{border-left:3px solid #e4d398;padding:13px 16px;margin:15px 0;background:#233c30;border-radius:5px}
+.beginner-worked p{margin:8px 0 0}
+.beginner-guide ol{padding-left:24px;display:grid;gap:9px}
+.beginner-remember{background:#2b4837;border-radius:8px;padding:12px 14px}
+@media(max-width:760px){.advanced-content .beginner-guide,.academy-lesson .beginner-guide{padding:14px}.beginner-guide h3{font-size:19px}.beginner-guide p,.beginner-guide li{font-size:13px}}
