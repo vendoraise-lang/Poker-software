@@ -4191,3 +4191,129 @@ button:disabled {
  .play-screen .hand-result > .primary{width:100%}
  .play-screen .showdown-summary{width:100%}
 }
+
+/* PokerLab Casino V2 — isolated structural replacement for the Play screen. */
+.play-screen .casino-v2 {
+  --casino-gold:#e8c574;
+  background:#0b1117;
+  border:1px solid #32474a;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 22px 65px #0008;
+}
+.play-screen .casino-v2 .table-toolbar {
+  background:#101920;
+  border-bottom:1px solid #33434b;
+  padding:14px 18px;
+  font-size:12px;
+}
+.play-screen .casino-v2 .table-last-action {
+  background:#15232b; color:#d8e8df;
+  border-bottom:0;
+  min-height:34px;
+}
+.play-screen .casino-v2 .casino-stage {
+  position:relative;
+  height:580px;
+  margin:0;
+  overflow:hidden;
+  isolation:isolate;
+  background:radial-gradient(ellipse at 50% 44%,#24433b 0%,#101e25 59%,#0b121b 85%);
+}
+.play-screen .casino-v2 .felt {
+  position:absolute;
+  left:5%; right:5%; top:107px; bottom:107px;
+  border-radius:49% / 45%;
+  border:13px solid #503d2f;
+  background:radial-gradient(ellipse at center,#276b58 0%,#144638 74%,#10362e 100%);
+  box-shadow:inset 0 0 0 3px #c6a36b,inset 0 0 0 14px #112f2b,0 15px 35px #000c;
+}
+.play-screen .casino-v2 .felt-inner {opacity:.4}
+.play-screen .casino-v2 .felt-wordmark {display:none}
+.play-screen .casino-v2 .seat {width:145px;z-index:5;opacity:1}
+.play-screen .casino-v2 .seat-2 {top:12px;left:50%;right:auto;bottom:auto;transform:translateX(-50%)}
+.play-screen .casino-v2 .seat-1 {left:1%;top:225px;right:auto;bottom:auto;transform:none}
+.play-screen .casino-v2 .seat-3 {right:1%;left:auto;top:225px;bottom:auto;transform:none}
+.play-screen .casino-v2 .seat-0 {bottom:12px;left:50%;right:auto;top:auto;transform:translateX(-50%);width:170px}
+.play-screen .casino-v2 .seat-cards {margin:0 0 8px;display:flex;justify-content:center;gap:5px}
+.play-screen .casino-v2 .seat-info {border-radius:11px;padding:9px;background:#0a171ceF;border:1px solid #50676b;box-shadow:0 5px 15px #000b;min-height:54px}
+.play-screen .casino-v2 .seat-info b {font-weight:750;font-size:12px;color:#f3f3e8}
+.play-screen .casino-v2 .seat-info small {font-size:12px;color:#d8e0d9}
+.play-screen .casino-v2 .seat-info em {display:none}
+.play-screen .casino-v2 .seat-caption {display:none}
+.play-screen .casino-v2 .folded .seat-info {opacity:.52}
+.play-screen .casino-v2 .board-area {top:50%;left:50%;transform:translate(-50%,-50%);width:max-content;max-width:96%;z-index:7}
+.play-screen .casino-v2 .pot-label {
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  border:1px solid #738e86;background:#071d1ae9;
+  border-radius:24px;padding:9px 16px;margin-bottom:12px;
+  font-size:10px;letter-spacing:.12em;color:#b8cbbc;white-space:nowrap;
+}
+.play-screen .casino-v2 .pot-label b {font-size:21px;color:#fff6d9;margin:0}
+.play-screen .casino-v2 .community {gap:6px;justify-content:center}
+.play-screen .casino-v2 .community .playing-card {width:50px;height:72px;font-size:21px;border-radius:6px}
+.play-screen .casino-v2 .street-tag {margin-top:12px;letter-spacing:.16em;font-weight:750;font-size:10px;color:#daebc9}
+.play-screen .casino-v2 .live-hand-label {
+  position:relative;top:auto;margin-top:10px;
+  color:#fff0bd;border-color:#d6b45d;font-size:13px;
+}
+.play-screen .casino-v2 .seat-0 .seat-cards .playing-card {width:55px;height:78px;font-size:23px}
+.play-screen .casino-v2 .seat-0 .seat-cards .playing-card.small>span {font-size:24px}
+.play-screen .casino-v2 .seat-bet {top:100%;bottom:auto;left:50%;right:auto;transform:translateX(-50%);margin-top:5px}
+.play-screen .casino-v2 .seat-0 .seat-bet {top:-35px;margin:0}
+.play-screen .casino-v2 .seat-award {top:100%;margin-top:4px;z-index:9}
+.play-screen .casino-v2 .seat-0 .seat-award {top:-36px;margin:0}
+.play-screen .casino-v2 .seat-action-bubble {top:-23px;z-index:10}
+.play-screen .casino-v2 .action-area {
+  position:relative;inset:auto;max-height:none;overflow:visible;
+  background:#101a22;border:0;border-top:1px solid #3a5054;
+  border-radius:0;padding:18px;box-shadow:none;backdrop-filter:none;
+}
+.play-screen .casino-v2 .turn-label {font-size:13px;color:#e0ece2}
+.play-screen .casino-v2 .bet-sizing {display:grid;grid-template-columns:90px minmax(110px,1fr) auto;align-items:center;gap:12px;padding:16px 0}
+.play-screen .casino-v2 .bet-sizing label {font-size:12px}
+.play-screen .casino-v2 .bet-adjuster {width:100%}
+.play-screen .casino-v2 .bet-limits {text-align:right}
+.play-screen .casino-v2 .quick-bets {grid-column:1/-1;justify-content:center}
+.play-screen .casino-v2 .action-buttons button {min-height:56px;font-size:15px;text-align:center;border-radius:10px}
+.play-screen .casino-v2 .action-buttons button.primary {background:#b3df91;color:#142719}
+.play-screen .casino-v2 .hand-result {display:flex;flex-direction:column;gap:12px;align-items:stretch}
+.play-screen .casino-v2 .showdown-summary {padding:14px 17px;background:#152823}
+.play-screen .casino-v2 .hand-result>.primary {width:100%;min-height:55px;text-align:center}
+@media(max-width:760px) {
+ .play-screen .casino-v2 {border-radius:13px}
+ .play-screen .casino-v2 .casino-stage {height:480px}
+ .play-screen .casino-v2 .felt {left:2%;right:2%;top:97px;bottom:90px;border-width:9px}
+ .play-screen .casino-v2 .seat {width:111px}
+ .play-screen .casino-v2 .seat-2 {top:10px}
+ .play-screen .casino-v2 .seat-1 {top:184px;left:1px}
+ .play-screen .casino-v2 .seat-3 {top:184px;right:1px}
+ .play-screen .casino-v2 .seat-0 {bottom:8px;width:135px}
+ .play-screen .casino-v2 .seat-info {padding:6px;min-height:45px;gap:5px}
+ .play-screen .casino-v2 .seat-info b {font-size:11px}
+ .play-screen .casino-v2 .seat-info small {font-size:11px}
+ .play-screen .casino-v2 .avatar {width:23px;height:23px}
+ .play-screen .casino-v2 .seat-cards .playing-card.small {width:34px;height:48px}
+ .play-screen .casino-v2 .seat-0 .seat-cards .playing-card {width:51px;height:71px}
+ .play-screen .casino-v2 .board-area {top:51%}
+ .play-screen .casino-v2 .community {gap:4px}
+ .play-screen .casino-v2 .community .playing-card {width:39px;height:59px;font-size:18px}
+ .play-screen .casino-v2 .pot-label {padding:7px 13px;font-size:9px;margin-bottom:12px}
+ .play-screen .casino-v2 .pot-label b {font-size:17px}
+ .play-screen .casino-v2 .seat-bet {top:100%;margin-top:4px}
+ .play-screen .casino-v2 .seat-0 .seat-bet {top:-26px}
+ .play-screen .casino-v2 .seat-award {top:100%;margin-top:4px}
+ .play-screen .casino-v2 .seat-0 .seat-award {top:-28px}
+ .play-screen .casino-v2 .seat-action-bubble {top:-21px}
+ .play-screen .casino-v2 .action-area {padding:12px}
+ .play-screen .casino-v2 .bet-sizing {display:flex;flex-direction:column;align-items:stretch;gap:7px;padding:10px 0}
+ .play-screen .casino-v2 .bet-sizing label {margin:0}
+ .play-screen .casino-v2 .bet-limits {text-align:center}
+ .play-screen .casino-v2 .quick-bets {justify-content:center;gap:5px}
+ .play-screen .casino-v2 .action-buttons button {padding:10px 3px;min-height:51px;font-size:12px}
+}
+@media(max-width:370px) {
+ .play-screen .casino-v2 .community .playing-card {width:34px;height:53px}
+ .play-screen .casino-v2 .seat {width:103px}
+}
+@media(prefers-reduced-motion:reduce){.play-screen .casino-v2 *{animation-duration:0s!important}}
