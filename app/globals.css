@@ -4119,3 +4119,57 @@ button:disabled {
 @keyframes seat-action-appear {from{opacity:0;transform:translate(-50%,6px)}to{opacity:1;transform:translate(-50%,0)}}
 @media(max-width:760px){.play-screen .seat-action-bubble{font-size:10px;padding:4px 6px;top:-25px}.play-screen .seat-0 .seat-action-bubble{top:-29px}}
 @media(prefers-reduced-motion:reduce){.seat-action-bubble{animation:none}}
+
+/* Casino room mobile layout rebuild: three clear lanes, no overlaid status text. */
+.play-screen .street-complete { display:none; }
+.play-screen .hand-coach-next {display:block; width:100%; padding:8px 12px; margin:0; background:#17231e; border:1px solid #31473a}
+.play-screen .hand-coach-next summary {cursor:pointer; font-size:12px; font-weight:600; color:#c5d9c1; list-style-position:inside}
+.play-screen .hand-coach-next p {margin:9px 0; font-size:12px}
+.play-screen .showdown-summary {margin:0; padding:9px 12px; border-radius:10px}
+.play-screen .showdown-summary strong {font-size:15px;letter-spacing:.05em}
+.play-screen .hand-result {gap:9px;align-items:stretch}
+.play-screen .hand-result > .primary {min-height:48px;text-align:center}
+@media(max-width:760px) {
+ .play-screen .table-toolbar {padding:9px 12px}
+ .play-screen .table-last-action {max-height:35px; overflow:hidden}
+ .play-screen .table-last-action span:last-child {white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .play-screen .table-scene {height:435px;margin-bottom:0;overflow:hidden}
+ .play-screen .felt {top:74px;bottom:77px;left:5%;right:5%;border-width:7px}
+ .play-screen .felt-wordmark {display:none}
+ .play-screen .seat {width:110px}
+ .play-screen .seat-2 {top:8px}
+ .play-screen .seat-1 {top:143px;left:1px}
+ .play-screen .seat-3 {top:143px;right:1px}
+ .play-screen .seat-0 {bottom:7px}
+ .play-screen .seat-info {gap:5px;padding:6px 5px}
+ .play-screen .avatar {width:24px;height:24px;font-size:12px;flex-shrink:0}
+ .play-screen .seat-info b {font-size:11px}
+ .play-screen .seat-info em {display:none}
+ .play-screen .seat-info small {font-size:10px;margin-top:2px}
+ .play-screen .seat-info small span {display:none}
+ .play-screen .position {font-size:9px;padding:4px}
+ .play-screen .board-area {top:186px;left:50%;width:max-content;max-width:calc(100% - 24px)}
+ .play-screen .community {gap:4px}
+ .play-screen .community .playing-card {width:40px;height:56px;font-size:17px}
+ .play-screen .pot-label {margin-bottom:10px;white-space:nowrap}
+ .play-screen .street-tag {margin-top:11px}
+ .play-screen .seat-0 .seat-cards .playing-card {width:48px;height:67px}
+ .play-screen .seat-0 .seat-cards {margin-bottom:3px}
+ .play-screen .seat-action-bubble {top:-29px;max-width:115px;overflow:hidden;text-overflow:ellipsis}
+ .play-screen .seat-0 .seat-action-bubble {top:-27px}
+ .play-screen .seat-award {top:56px}
+ .play-screen .seat-0 .seat-award {top:100%;margin-top:4px}
+ .play-screen .seat-bet {z-index:4}
+ .play-screen .seat-1 .seat-bet {top:88px;right:-2px}
+ .play-screen .seat-3 .seat-bet {top:88px;left:-2px}
+ .play-screen .action-area {padding:10px 12px;position:relative;max-height:none;overflow:visible}
+ .play-screen .turn-label {font-size:11px}
+ .play-screen .bet-sizing {display:block}
+ .play-screen .bet-sizing label {display:block;margin-bottom:8px}
+ .play-screen .quick-bets {margin-top:9px}
+}
+@media(max-width:380px) {
+ .play-screen .seat {width:100px}
+ .play-screen .community .playing-card {width:35px;height:51px}
+ .play-screen .board-area {top:187px}
+}
