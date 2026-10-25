@@ -4173,3 +4173,21 @@ button:disabled {
  .play-screen .community .playing-card {width:35px;height:51px}
  .play-screen .board-area {top:187px}
 }
+
+/* Fix completed hand readability at phone widths */
+@media(max-width:760px){
+ .play-screen .table-scene{height:475px}
+ .play-screen .felt{top:86px;bottom:88px}
+ .play-screen .seat-2{top:14px}
+ .play-screen .seat-1,.play-screen .seat-3{top:170px}
+ .play-screen .board-area{top:210px}
+ .play-screen .seat-0{bottom:10px}
+ .play-screen .seat-0 .seat-cards{margin-bottom:7px}
+ .play-screen .seat-0 .seat-cards .playing-card{width:49px;height:68px}
+ .play-screen .seat-0 .seat-award{top:100%}
+ .play-screen .seat .busted{display:block;font-size:10px;text-align:center;color:#a7b3ab;padding:5px}
+ .play-screen .seat.folded .seat-cards{min-height:20px}
+ .play-screen .hand-result{display:flex;flex-direction:column;align-items:stretch}
+ .play-screen .hand-result > .primary{width:100%}
+ .play-screen .showdown-summary{width:100%}
+}
