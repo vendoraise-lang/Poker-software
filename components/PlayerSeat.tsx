@@ -24,7 +24,7 @@ export default function PlayerSeat({
     >
       {showAction && <div className="seat-action-bubble" key={latestAction} aria-label={`${p.name} ${actionText}`}>{actionText}</div>}
       <div className="seat-cards">
-        {p.cards.length ? (
+        {p.cards.length && !(complete && p.folded) ? (
           p.cards.map((c, j) => (
             <span key={j} className={highlightedCards ? highlightedCards.has(j) ? "best-five-card" : "non-best-card" : undefined}>
             <Card
@@ -42,7 +42,7 @@ export default function PlayerSeat({
             </span>
           ))
         ) : (
-          <span className="busted">Sitting out</span>
+          <span className="busted">{p.cards.length ? "Folded" : "Sitting out"}</span>
         )}
       </div>
       <div className="seat-info">
