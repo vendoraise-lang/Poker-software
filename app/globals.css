@@ -4440,3 +4440,42 @@ button:disabled {
 .academy-legacy-wrap{max-width:1160px;margin:24px auto;border:1px solid #537063;padding:16px;border-radius:12px}.academy-legacy-wrap>summary{cursor:pointer;font-weight:750;color:#e9dbab;font-size:15px}.academy-legacy-wrap>.academy-shell{max-width:100%}
 .academy-new-page .workspace-links{max-width:100%}
 @media(max-width:760px){.academy-new-page{padding:10px 8px}.academy-new-page .workspace-primary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}.academy-new-page .workspace-primary a{font-size:10px;min-width:0;padding:11px 2px;text-align:center;overflow-wrap:anywhere}.academy-new-hero>span{margin-top:14px}.academy-new-hero>nav a{padding:10px}.academy-legacy-wrap{padding:9px}.academy-new-page .academy-layout{min-width:0;max-width:100%}.academy-new-page .academy-modules{display:flex;overflow-x:auto;max-width:100%;gap:8px}.academy-new-page .academy-modules button{min-width:190px;flex:0 0 190px}}
+
+/* Critical fix: old global main/header rules must never control standalone Academy. */
+main.academy-new-page{margin:0!important;width:100%!important;max-width:none;min-width:0;box-sizing:border-box;overflow-x:clip}
+.academy-new-page header.academy-new-hero,
+.academy-new-page .rl-header,
+.academy-new-page .advanced-intro,
+.academy-new-page .advanced-content>header,
+.academy-new-page .academy-header{
+ height:auto!important;min-height:0!important;
+ display:block!important;
+ padding:0!important;
+ border-bottom:0!important;
+ width:100%!important;
+ max-width:100%;
+ position:relative;
+}
+.academy-new-page .academy-new-hero{padding:0 4px 16px!important}
+.academy-new-page .rl-header h2,.academy-new-page .rl-header p,
+.academy-new-page .academy-new-hero h1,.academy-new-page .academy-new-hero p,
+.academy-new-page .advanced-intro h2,.academy-new-page .advanced-intro p{
+ width:auto!important;max-width:100%!important;
+ position:static!important;float:none!important;
+ overflow-wrap:normal;white-space:normal;
+}
+.academy-new-page .rl-header{display:block!important;clear:both;overflow:visible}
+.academy-new-page .rl-header>span{display:block}
+.academy-new-page .rl-header h2{margin:10px 0 12px;line-height:1.2}
+.academy-new-page .rl-header p{margin:0 0 14px;line-height:1.55}
+.academy-new-page .academy-new-hero .workspace-links{height:auto!important;min-height:0!important;position:static;overflow:visible}
+.academy-new-page .academy-new-hero>nav{width:100%;position:static}
+.academy-new-page .advanced-intro{padding:20px!important;display:flex!important}
+.academy-new-page .advanced-content>header{padding:0 0 10px!important}
+@media(max-width:760px){
+ .academy-new-page .advanced-intro{display:block!important;padding:16px!important}
+ .academy-new-page .rl-shell{width:100%;box-sizing:border-box}
+ .academy-new-page .rl-header{width:100%!important}
+ .academy-new-page .rl-matrix{min-width:0;max-width:100%}
+ .academy-new-page .rl-cell{overflow:hidden;line-height:1;white-space:nowrap}
+}
