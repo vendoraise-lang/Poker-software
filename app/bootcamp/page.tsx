@@ -13,8 +13,8 @@ export default function Bootcamp(){
  const [step,setStep]=useState(0); const [answers,setAnswers]=useState<Record<number,number>>({});
  const lesson=drills[step]; const selected=answers[step]; const done=Object.keys(answers).length;
  return <main className="bootcamp-screen">
-   <WorkspaceLinks current="Academy"/>
-   <div className="bootcamp-head"><span>POKERLAB · TRAINING ROOM</span><h1>Your first 30 minutes</h1><p>Four focused rounds. Learn one idea, make a decision, then practice it at the table. Play chips only.</p></div>
+   <WorkspaceLinks current="Bootcamp"/>
+   <div className="bootcamp-head"><span>POKERLAB · TRAINING ROOM</span><h1>Your first 30 minutes</h1><p>Four focused rounds. Learn one idea, make a decision, then practice it at the table. Play chips only.</p><Link className="bootcamp-casino-link" href="/?workspace=Practice">♠ Enter the casino table →</Link></div>
    <div className="bootcamp-progress"><span>{done}/4 decisions completed</span><div><i style={{width:`${done*25}%`}}/></div></div>
    <div className="bootcamp-steps">{drills.map((d,i)=><button key={d.title} className={step===i?"selected":""} onClick={()=>setStep(i)}><small>{i+1} · {d.minutes} min</small><strong>{d.title}</strong></button>)}</div>
    <section className="bootcamp-lesson"><div className="bootcamp-eyebrow">ROUND {step+1} · {lesson.minutes} MINUTES</div><h2>{lesson.title}</h2><p>{lesson.lesson}</p><div className="bootcamp-question"><h3>{lesson.question}</h3>{lesson.options.map((opt,i)=><button key={opt} disabled={selected!==undefined} className={selected===i?"picked":""} onClick={()=>setAnswers(old=>({...old,[step]:i}))}>{opt}</button>)}{selected!==undefined&&<div className="bootcamp-answer" role="status"><strong>{selected===lesson.correct?"Good decision":"Review this concept"}</strong><p>{lesson.why}</p></div>}</div>
