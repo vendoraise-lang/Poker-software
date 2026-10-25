@@ -271,7 +271,7 @@ export default function Home() {
           {tab === "Practice" ? (
             <>
               <div className="practice-layout">
-                <section className="table-panel">
+                <section className="table-panel casino-v2">
                   <div className="table-toolbar">
                     <div>
                       <span className="live-dot" /> Practice table{" "}
@@ -286,7 +286,7 @@ export default function Home() {
                     <span className="action-indicator" aria-hidden="true" />
                     <span>{game.log.at(-1) ?? "Blinds posted"}</span>
                   </div>
-                  <div className="table-scene" key={`table-${game.hand}`}>
+                  <div className="table-scene casino-stage" key={`table-${game.hand}`}>
                     <div className="felt">
                       <div className="felt-inner" />
                       <span className="felt-wordmark">
