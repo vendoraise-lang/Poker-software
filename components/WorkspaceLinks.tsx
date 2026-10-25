@@ -17,6 +17,7 @@ export default function WorkspaceLinks({ current }: { current?: string }) {
       <details className="workspace-more">
         <summary>More tools</summary>
         <div className="workspace-extra">
+          <Link href="/bootcamp">30-minute training plan</Link>
           <Link href="/academy">Academy</Link>
           <Link href="/?workspace=Equity">Equity calculator</Link>
           <Link href="/review">Hand review</Link>
