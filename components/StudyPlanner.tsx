@@ -25,7 +25,7 @@ export default function StudyPlanner(){
  const raw=localStorage.getItem(key),parsed:unknown=raw?JSON.parse(raw):[];
  if(Array.isArray(parsed))setEntries(parsed.filter((e):e is Entry=>e&&typeof e==="object"&&typeof e.date==="string"&&typeof e.minutes==="number"&&typeof e.focus==="string"&&typeof e.decision==="string"&&typeof e.takeaway==="string").slice(0,90));
  }catch{}setReady(true)},0);return()=>clearTimeout(id)},[]);
- useEffect(()=>{if(ready)try{localStorage.setItem(key,JSON.stringify(entries))}catch{setError("This browser cannot save your study log.")}},[entries,ready]);
+ useEffect(()=>{if(ready)try{localStorage.setItem(key,JSON.stringify(entries))}catch{}},[entries,ready]);
  const total=entries.reduce((sum,e)=>sum+e.minutes,0),sessions=entries.length;
  const counts=topics.map(t=>({topic:t,count:entries.filter(e=>e.focus===t).length})).sort((a,b)=>a.count-b.count);
  const recommended=counts[0]?.topic??topics[0];
