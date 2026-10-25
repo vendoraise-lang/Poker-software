@@ -137,11 +137,11 @@ export default function Home() {
   }
   const complete = game.street === "Showdown";
   const handCoach = hero.folded
-    ? { title: "Review your fold", detail: "Was the price worth continuing against this opponent?", href: "/practice/opening", action: "Practice starting hands" }
+    ? { title: "Review your fold", detail: "Was the price worth continuing against this opponent?", href: "/?workspace=Train", action: "Practice starting hands" }
     : game.board.length === 5
-      ? { title: "Review your river decision", detail: "Think about value, bluffs, and which worse hands could call.", href: "/practice/postflop", action: "Practice postflop decisions" }
+      ? { title: "Review your river decision", detail: "Think about value, bluffs, and which worse hands could call.", href: "/?workspace=Train", action: "Practice postflop decisions" }
       : game.board.length >= 3
-        ? { title: "Review the flop", detail: "Consider position, board texture, and opponent range.", href: "/practice/postflop", action: "Practice postflop decisions" }
+        ? { title: "Review the flop", detail: "Consider position, board texture, and opponent range.", href: "/?workspace=Train", action: "Practice postflop decisions" }
         : { title: "Review your preflop choice", detail: "Think about starting hand strength and your position.", href: "/practice/opening", action: "Practice starting hands" };
   const heroMadeHand = hero.cards.length === 2 && game.board.length >= 3
     ? ranks[evaluate([...hero.cards, ...game.board])[0]]
@@ -220,6 +220,7 @@ export default function Home() {
         </header>
         <div className="page-content">
           <WorkspaceLinks current={tab === "Practice" ? "Play" : tab} />
+          {tab === "Practice" && <Link className="casino-learn-entry" href="/bootcamp"><span><strong>NEW · 30-minute training course</strong><small>Four practical lessons to improve your next hand.</small></span><span>Start learning →</span></Link>}
           <div className={`page-heading ${tab === "Practice" ? "practice-heading-compact" : ""}`}>
             <div>
               {tab !== "Practice" && <div className="eyebrow">A LITTLE PRACTICE. A BETTER PLAYER.</div>}
