@@ -4,7 +4,7 @@ import Link from "next/link";
 import {advancedUnits} from "@/lib/academy/advanced";
 export default function AdvancedAcademy(){
  const [unit,setUnit]=useState(0),[answers,setAnswers]=useState<Record<string,number>>({}),[ready,setReady]=useState(false);
- useEffect(()=>{try{const raw=localStorage.getItem("pokerlab-advanced-v1");if(raw){const obj=JSON.parse(raw);if(obj&&typeof obj==="object"&&!Array.isArray(obj)){const clean:Record<string,number>={};for(const [k,v] of Object.entries(obj)){if(/^\\d+-\\d+$/.test(k)&&typeof v==="number"&&Number.isInteger(v)&&v>=0&&v<3)clean[k]=v;}setAnswers(clean)}}}catch{}setReady(true)},[]);
+ useEffect(()=>{try{const raw=localStorage.getItem("pokerlab-advanced-v1");if(raw){const obj=JSON.parse(raw);if(obj&&typeof obj==="object"&&!Array.isArray(obj)){const clean:Record<string,number>={};for(const [k,v] of Object.entries(obj)){if(/^\d+-\d+$/.test(k)&&typeof v==="number"&&Number.isInteger(v)&&v>=0&&v<3)clean[k]=v;}setAnswers(clean)}}}catch{}setReady(true)},[]);
  useEffect(()=>{if(ready)try{localStorage.setItem("pokerlab-advanced-v1",JSON.stringify(answers))}catch{}},[answers,ready]);
  const current=advancedUnits[unit], count=Object.keys(answers).length, total=advancedUnits.reduce((n,u)=>n+u.drills.length,0);
  const right=advancedUnits.reduce((n,u,i)=>n+u.drills.filter((d,j)=>answers[`${i}-${j}`]===d.correct).length,0);
