@@ -4,40 +4,10 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import WorkspaceLinks from "@/components/WorkspaceLinks";
 import EquityLab from "@/components/EquityLab";
-import Card from "@/components/Card";
 import TrainingHub from "@/components/TrainingHub";
 import usePokerSession from "@/components/usePokerSession";
-import HandReplay from "@/components/HandReplay";
 import CasinoRoom from "@/components/CasinoRoom";
-import {
-  botAction,
-  compare,
-  evaluate,
-  type Card as PokerCard,
-  legal,
-  position,
-  ranks,
-  type Action,
-} from "@/lib/poker";
-
-function bestFiveIndices(cards: PokerCard[]): number[] {
-  if (cards.length < 5) return [];
-  let best: number[] = [];
-  let value: number[] = [];
-  for (let a = 0; a < cards.length - 4; a++)
-    for (let b = a + 1; b < cards.length - 3; b++)
-      for (let c = b + 1; c < cards.length - 2; c++)
-        for (let d = c + 1; d < cards.length - 1; d++)
-          for (let e = d + 1; e < cards.length; e++) {
-            const indices = [a, b, c, d, e];
-            const next = evaluate(indices.map(i => cards[i]));
-            if (!best.length || compare(next, value) > 0) {
-              best = indices;
-              value = next;
-            }
-          }
-  return best;
-}
+import { botAction } from "@/lib/poker";
 
 const lessons = [
   {
@@ -88,10 +58,7 @@ export default function Home() {
     setTab(value);
     window.history.replaceState(null, "", `/?workspace=${value}`);
   }
-  const [amount, setAmount] = useState(40);
-  const [error, setError] = useState("");
   const [lesson, setLesson] = useState("position");
-  const [training, setTraining] = useState(true);
   useEffect(() => {
     if (
       loaded &&
@@ -106,53 +73,6 @@ export default function Home() {
       return () => clearTimeout(timer);
     }
   }, [game, loaded, restoreError, takeAction]);
-  const l = legal(game),
-    hero = game.players[0],
-    pot = game.players.reduce((s, p) => s + p.total, 0),
-    isTurn = loaded && !restoreError && game.actor === 0;
-  const bet = Math.min(l.max, Math.max(Math.min(l.min, l.max), amount));
-  const canSize = isTurn && l.canRaise;
-  const legalMinimum = Math.min(l.min, l.max);
-  const amountStep = Math.max(10, Math.round(Math.max(20, pot * 0.1) / 10) * 10);
-  const sizingPresets = game.currentBet > 0
-    ? [2, 2.5, 3, 4].map((multiplier) => ({ label: `${multiplier}×`, amount: Math.round(game.currentBet * multiplier) }))
-    : [0.25, 0.33, 0.5, 0.75, 1].map((fraction) => ({ label: `${Math.round(fraction * 100)}%`, amount: Math.ceil(pot * fraction) }));
-  function setLegalAmount(candidate: number) {
-    setAmount(Math.min(l.max, Math.max(l.min, candidate)));
-  }
-  function play(action: Action) {
-    try {
-      takeAction(
-        action,
-        action === "bet" || action === "raise" ? bet : undefined,
-      );
-      setError("");
-    } catch (e) {
-      setError((e as Error).message);
-    }
-  }
-  function next() {
-    nextHand();
-    setError("");
-  }
-  const complete = game.street === "Showdown";
-  const handCoach = hero.folded
-    ? { title: "Review your fold", detail: "Was the price worth continuing against this opponent?", href: "/?workspace=Train", action: "Practice starting hands" }
-    : game.board.length === 5
-      ? { title: "Review your river decision", detail: "Think about value, bluffs, and which worse hands could call.", href: "/?workspace=Train", action: "Practice postflop decisions" }
-      : game.board.length >= 3
-        ? { title: "Review the flop", detail: "Consider position, board texture, and opponent range.", href: "/?workspace=Train", action: "Practice postflop decisions" }
-        : { title: "Review your preflop choice", detail: "Think about starting hand strength and your position.", href: "/practice/opening", action: "Practice starting hands" };
-  const heroMadeHand = hero.cards.length === 2 && game.board.length >= 3
-    ? ranks[evaluate([...hero.cards, ...game.board])[0]]
-    : null;
-  const heroWon = complete && game.awards[0] > 0;
-  const recipients = game.awards.map((amount, i) => ({ amount, name: game.players[i].name })).filter(x => x.amount > 0);
-  const atShowdown = complete && game.board.length === 5;
-  const bestHero = atShowdown && !hero.folded && hero.cards.length === 2
-    ? bestFiveIndices([...hero.cards, ...game.board]) : [];
-  const heroBestBoard = new Set(bestHero.filter(i => i >= 2).map(i => i - 2));
-  const heroBestHole = new Set(bestHero.filter(i => i < 2));
   return (
     <div className="app-shell">
       <Suspense fallback={null}>
