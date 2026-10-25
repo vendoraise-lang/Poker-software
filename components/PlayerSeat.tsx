@@ -11,10 +11,18 @@ export default function PlayerSeat({
 }) {
   const p = game.players[i];
   const complete = game.street === "Showdown";
+  const latestAction = [...game.log].reverse().find(line =>
+    line.startsWith(p.name + " ") &&
+    / (fold|check|call|bet|raise)( |$)/.test(line)
+  );
+  const showAction = !complete && latestAction &&
+    !game.log.slice(game.log.lastIndexOf(latestAction) + 1).some(line => line.startsWith("— "));
+  const actionText = latestAction?.slice(p.name.length + 1) ?? "";
   return (
     <div
       className={`seat seat-${i} ${game.actor === i ? "active-seat" : ""} ${p.folded ? "folded" : ""} ${complete && game.awards[i] > 0 ? "awarded-seat" : ""}`}
     >
+      {showAction && <div className="seat-action-bubble" key={latestAction} aria-label={`${p.name} ${actionText}`}>{actionText}</div>}
       <div className="seat-cards">
         {p.cards.length ? (
           p.cards.map((c, j) => (
