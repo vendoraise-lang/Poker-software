@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Card from "./Card";
 import ProgressBackup from "./ProgressBackup";
-import {beginnerGuides} from "@/lib/academy/beginner";
+import {foundationGuides} from "@/lib/academy/beginner";
 import {
   MODULES,
   LABELS,
@@ -338,7 +338,7 @@ export default function Academy() {
                   currentModule.lessons.map((l) => (
                     <section className="academy-lesson" key={l.id} id={`academy-lesson-${l.id}`} tabIndex={-1}>
                       <h3>{l.title}</h3>
-                      <p className="academy-lesson-summary">{l.tryIt}</p><div className="beginner-guide"><span>BEGINNER EXPLANATION</span><p><b>First understand:</b> {beginnerGuides[(currentModule.id-1)*2+(currentModule.lessons.indexOf(l)%2)]?.meaning??beginnerGuides[0].meaning}</p><p><b>For example:</b> {beginnerGuides[(currentModule.id-1)*2+(currentModule.lessons.indexOf(l)%2)]?.example??beginnerGuides[0].example}</p><p><b>Remember:</b> {beginnerGuides[(currentModule.id-1)*2+(currentModule.lessons.indexOf(l)%2)]?.remember??beginnerGuides[0].remember}</p></div>
+                      <p className="academy-lesson-summary">{l.tryIt}</p><div className="beginner-guide"><span>BEGINNER EXPLANATION</span><p><b>First understand:</b> {foundationGuides[l.concept]?.meaning??l.text}</p><p><b>For example:</b> {foundationGuides[l.concept]?.example??l.tryIt}</p><p><b>Remember:</b> {foundationGuides[l.concept]?.remember??l.tryIt}</p></div>
                       <details className="academy-deep-dive"><summary>Read the full lesson</summary><p>{l.text}</p></details>
                       <Exercise
                         q={getQuestion(l.practiceId)}
