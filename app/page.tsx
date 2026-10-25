@@ -7,7 +7,7 @@ import EquityLab from "@/components/EquityLab";
 import TrainingHub from "@/components/TrainingHub";
 import usePokerSession from "@/components/usePokerSession";
 import CasinoRoom from "@/components/CasinoRoom";
-import { botAction } from "@/lib/poker";
+import { botAction, ranks } from "@/lib/poker";
 
 const lessons = [
   {
