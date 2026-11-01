@@ -4518,3 +4518,13 @@ main.academy-new-page{margin:0!important;width:100%!important;max-width:none;min
 .beginner-guide ol{padding-left:24px;display:grid;gap:9px}
 .beginner-remember{background:#2b4837;border-radius:8px;padding:12px 14px}
 @media(max-width:760px){.advanced-content .beginner-guide,.academy-lesson .beginner-guide{padding:14px}.beginner-guide h3{font-size:19px}.beginner-guide p,.beginner-guide li{font-size:13px}}
+
+.flop-basics{background:#17352d;border:1px solid #79a185;color:#f3f5e8;border-radius:14px;padding:22px;margin-bottom:24px}
+.flop-eyebrow{font-size:11px;letter-spacing:1.3px;font-weight:800;color:#eddc9d}
+.flop-basics h3{font-size:25px;margin:12px 0}.flop-basics p{line-height:1.7;font-size:14px;color:#e0ebdf}
+.flop-steps{background:#10251f;border-radius:12px;padding:18px;border:1px solid #5e826f}
+.flop-steps>strong{font-size:11px;color:#efd8a0}.flop-board{display:flex;flex-wrap:wrap;gap:12px;margin:17px 0}.flop-board span{border:1px solid #95c3a6;background:#274b3a;border-radius:9px;padding:13px;font-size:18px;font-weight:800}
+.flop-steps h4{font-size:18px;color:#fff1c7;margin:14px 0}.flop-choices{display:grid;gap:9px}.flop-choices button{padding:13px;text-align:left;border:1px solid #6d9a80;background:#285143;border-radius:9px;color:#edf5e7;font-size:14px}
+.flop-choices button:disabled{opacity:.55}.flop-feedback{background:#32533a;border-left:3px solid #ffe0a3;padding:16px;margin-top:15px;border-radius:7px}.flop-feedback>strong{color:#ffdda4}
+.flop-feedback button{background:#dcebb7;color:#1d3021;font-weight:800;border:0;padding:12px 15px;border-radius:9px}.flop-note{margin:14px 0 0;font-size:12px!important}
+@media(max-width:760px){.flop-basics{padding:14px}.flop-board span{font-size:15px}.flop-basics h3{font-size:21px}}
