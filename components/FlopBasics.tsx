@@ -1,0 +1,16 @@
+"use client";
+import {useState} from "react";
+const examples=[
+ {cards:"A♣ 7♦ 2♠",hand:"A♠ K♦",story:"You raised before the flop. One player called. You now have a pair of aces.",question:"Why might you make a small bet?",options:["A weaker ace or pair may call","Because any pair always wins","To make the pot as big as possible"],correct:0,why:"A weaker ace, such as A-9, may call your bet even though your A-K is ahead. Betting because weaker hands may call is called value betting.",takeaway:"A value bet wants to be called by worse hands."},
+ {cards:"J♠ T♠ 9♦",hand:"A♣ A♥",story:"You have pocket aces, but the flop contains connected cards and two spades.",question:"What should you notice before betting?",options:["My aces cannot lose","There are possible straights and draws","All opponents must fold"],correct:1,why:"Hands like Q-K already make a straight. Spade draws could improve later. Your aces may still be good, but this flop offers your opponent more ways to have a strong hand.",takeaway:"Strong starting cards do not guarantee a strong hand on every flop."},
+ {cards:"K♣ 7♦ 2♠",hand:"8♠ 8♥",story:"You have a pair of eights, and a king is on the board. Your opponent has called you before.",question:"What is a sensible question to ask?",options:["How many weaker hands will call a bet?","Does the king make my eights a straight?","Is checking always illegal?"],correct:0,why:"A bet may get called by many kings that beat your eights. Checking can keep the pot smaller and allow you to see what the opponent does.",takeaway:"You do not need to bet every time you have a pair."}
+];
+export default function FlopBasics(){
+ const [step,setStep]=useState(0),[choice,setChoice]=useState<number|null>(null);
+ const s=examples[step];
+ return <section className="flop-basics" aria-label="Flop strategy beginner lesson">
+ <span className="flop-eyebrow">MODULE 4 · START WITH THE BASICS</span><h3>First learn to read the flop</h3><p>The <b>flop</b> means the first three community cards. Your job is to look at your own cards, look at the flop, and ask which hands your opponent could have. You do <b>not</b> need calculations yet.</p>
+ <div className="flop-steps"><strong>Example {step+1} of {examples.length}</strong><div className="flop-board"><span>Your cards: {s.hand}</span><span>Flop: {s.cards}</span></div><p>{s.story}</p><h4>{s.question}</h4><div className="flop-choices">{s.options.map((o,i)=><button type="button" key={o} disabled={choice!==null} onClick={()=>setChoice(i)}>{o}</button>)}</div>
+ {choice!==null&&<div className="flop-feedback" role="status"><strong>{choice===s.correct?"Yes — that's the idea.":"Let's understand this before moving on."}</strong><p>{s.why}</p><p><b>Remember:</b> {s.takeaway}</p><button onClick={()=>{setStep(x=>(x+1)%examples.length);setChoice(null)}}>Try another example →</button></div>}</div>
+ <p className="flop-note">When these examples make sense, continue to the advanced questions below. They use new names for ideas you're already learning.</p></section>;
+}
