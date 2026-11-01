@@ -25,12 +25,18 @@ export default function AdvancedAcademy(){
      }
     }
    }catch{}
+   try {
+    const raw=localStorage.getItem("pokerlab-coach-v1");
+    if(raw){const value=JSON.parse(raw);if(value&&typeof value==="object"){
+      if(value.reasoning&&typeof value.reasoning==="object")setReasoning(Object.fromEntries(Object.entries(value.reasoning).filter(([,v])=>typeof v==="string"&&v.length<=500)));
+      if(value.reviewed&&typeof value.reviewed==="object")setReviewed(Object.fromEntries(Object.entries(value.reviewed).filter(([,v])=>typeof v==="boolean")));
+    }}
+   }catch{}
    setReady(true);
   },0);
   return ()=>window.clearTimeout(task);
  },[]);
  useEffect(()=>{if(ready)try{localStorage.setItem("pokerlab-advanced-v1",JSON.stringify(answers))}catch{}},[answers,ready]);
- useEffect(()=>{const task=window.setTimeout(()=>{try{const raw=localStorage.getItem("pokerlab-coach-v1");if(raw){const value=JSON.parse(raw);if(value&&typeof value==="object"){if(value.reasoning&&typeof value.reasoning==="object")setReasoning(Object.fromEntries(Object.entries(value.reasoning).filter(([,v])=>typeof v==="string"&&v.length<=500)));if(value.reviewed&&typeof value.reviewed==="object")setReviewed(Object.fromEntries(Object.entries(value.reviewed).filter(([,v])=>typeof v==="boolean")))}}}catch{}},0);return()=>window.clearTimeout(task)},[]);
  useEffect(()=>{if(ready)try{localStorage.setItem("pokerlab-coach-v1",JSON.stringify({reasoning,reviewed}))}catch{}},[reasoning,reviewed,ready]);
  const guide=beginnerGuides[unit];
  const current=advancedUnits[unit], count=Object.keys(answers).length, total=advancedUnits.reduce((n,u)=>n+u.drills.length,0);
