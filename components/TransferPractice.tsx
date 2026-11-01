@@ -1,5 +1,5 @@
 "use client";
-import {useState} from "react";
+import {useEffect,useState} from "react";
 type Spot={topic:string;cards:string;story:string;question:string;options:[string,string,string];correct:number;reason:string};
 const spots:Spot[]=[
 {topic:"Value betting",cards:"Your hand: A♠ Q♦ · Board: A♥ 7♣ 2♦ 5♠ 3♣",story:"One opponent has called small bets with weak pairs. You act on the river. No one has bet yet.",question:"Why might a modest bet be useful?",options:["Weaker aces might call","A pair of aces must always bet","Betting guarantees a win"],correct:0,reason:"You have top pair with a queen kicker. A weaker ace such as A-9 may call. Value betting means trying to be paid by worse hands. You can still lose to stronger hands."},
@@ -13,16 +13,42 @@ const spots:Spot[]=[
 {topic:"Turn decisions",cards:"Your hand: A♠ J♦ · Board: A♣ 7♥ 2♦ 9♥",story:"You have a pair of aces. Your opponent called your flop bet. A second heart arrives on the turn.",question:"What changed on the turn?",options:["No new hand became possible","Some heart draws became possible","Every player now has a flush"],correct:1,reason:"Two hearts on the board can create a flush draw for someone holding two hearts. It does not yet make a flush, which needs five same-suit cards."},
 {topic:"Hand selection",cards:"Your hand: A♠ 5♦ · Six-player table",story:"You act first before the flop. Several players still have to make decisions.",question:"What should influence whether you raise?",options:["Only that you have an ace","Your position and the hands players behind may hold","Whether you lost the last hand"],correct:1,reason:"A-5 offsuit can be difficult to play from early position. Position and opponents' possible hands matter; one ace does not make a hand automatically profitable."}
 ];
+type Result={topic:string;correct:boolean;at:number};
+const saveKey="pokerlab-transfer-history-v2";
+const topics=[...new Set(spots.map(s=>s.topic))];
+function createSpot(index:number):Spot{
+ const base=spots[index%spots.length];
+ if(base.topic==="Pot odds"){
+  const pot=[80,100,120,160,200,240][Math.floor(index/spots.length)%6];
+  const bet=pot/2, required=25, equity=[18,30,20,38,24,35][Math.floor(index/spots.length)%6];
+  const good=equity>=required;
+  return {...base,cards:`Pot before bet: ${pot} chips · Opponent bets: ${bet} chips`,story:`It is the river. Calling costs ${bet} chips. The final pot after calling is ${pot+bet*2} chips. Assume you win ${equity}% of the time.`,question:"In this simplified, no-fee example, should you call?",options:["Call: the estimated win chance covers the cost","Fold: the estimated win chance is too low","Call: a call always wins some chips"],correct:good?0:1,reason:`You pay ${bet} to contest ${pot+bet*2}, so you need ${required}% equity. Your estimate is ${equity}%. ${good?"That is above the required percentage, making the call profitable on average.":"That is below the required percentage, so folding loses fewer chips on average."} This assumes an accurate estimate and no fees.`};
+ }
+ if(base.topic==="Bluffing"){
+  const pot=[80,100,120,160,200,240][Math.floor(index/spots.length)%6];
+  const bet=pot,fold=[35,55,30,65,45,70][Math.floor(index/spots.length)%6],good=fold>50;
+  return {...base,cards:`Pot: ${pot} chips · River bluff: ${bet} chips`,story:`Your hand cannot win when called. Your opponent folds approximately ${fold}% of the time.`,question:"Will this pure bluff earn chips on average?",options:["Yes, the opponent folds enough","No, the opponent does not fold enough","Yes, every pot-sized bluff is profitable"],correct:good?0:1,reason:`The bluff risks ${bet} chips to win ${pot}. A pot-sized bluff needs more than 50% folds. Estimated folds: ${fold}%. Per 100 hands, the net is ${((fold*pot-(100-fold)*bet)/100).toFixed(0)} chips per bluff on average.`};
+ }
+ return base;
+}
 export default function TransferPractice(){
- const [round,setRound]=useState(0),[answer,setAnswer]=useState<number|null>(null),[scores,setScores]=useState<Record<number,boolean>>({});
- const [showWhy,setShowWhy]=useState(false);
- const seen=Object.keys(scores).length,right=Object.values(scores).filter(Boolean).length;
- const order=Array.from({length:spots.length},(_,i)=>(i*7+3)%spots.length);
- const currentIndex=order[round%spots.length];
- const current=spots[currentIndex];
+ const [round,setRound]=useState(0),[answer,setAnswer]=useState<number|null>(null);
+ const [history,setHistory]=useState<Result[]>([]),[ready,setReady]=useState(false);
+ const [selectedTopic,setSelectedTopic]=useState("All skills");
+ const [sessionSeed,setSessionSeed]=useState(0);
+ useEffect(()=>{const t=window.setTimeout(()=>{try{const raw=localStorage.getItem(saveKey);if(raw){const v:unknown=JSON.parse(raw);if(Array.isArray(v))setHistory(v.filter((x):x is Result=>!!x&&typeof x==="object"&&typeof x.topic==="string"&&typeof x.correct==="boolean"&&typeof x.at==="number").slice(-500))}}catch{}setReady(true)},0);return()=>window.clearTimeout(t)},[]);
+ useEffect(()=>{if(ready)try{localStorage.setItem(saveKey,JSON.stringify(history))}catch{}},[history,ready]);
+ const eligible=spots.map((s,i)=>({s,i})).filter(({s})=>selectedTopic==="All skills"||s.topic===selectedTopic);
+ const chosen=eligible[(round+sessionSeed)%eligible.length];
+ const current=createSpot(chosen.i+Math.floor((round+sessionSeed)/eligible.length)*spots.length);
+ const seen=history.length,right=history.filter(x=>x.correct).length,recent=history.slice(-20);
+ function submit(i:number){if(answer!==null)return;setAnswer(i);setHistory(h=>[...h,{topic:current.topic,correct:i===current.correct,at:Date.now()}].slice(-500))}
+ function next(){setRound(v=>v+1);setAnswer(null)}
  return <section className="transfer-lab" aria-label="Fresh poker hand practice">
- <div className="transfer-heading"><span>POKERLAB · APPLY WHAT YOU LEARNED</span><h2>New hand. Same idea. Can you explain why?</h2><p>These are different situations from your lessons. Read the cards and story first, then choose an answer. Every choice has feedback, including why the other options fail. All scenarios use play chips.</p><strong>{right} / {seen} correct this round</strong></div>
- <div className="transfer-card"><small>{current.topic.toUpperCase()} · HAND {round%spots.length+1} OF {spots.length}</small><h3>{current.cards}</h3><p>{current.story}</p><h4>{current.question}</h4><div className="transfer-options">{current.options.map((option,i)=><button type="button" key={option} disabled={answer!==null} onClick={()=>{setAnswer(i);setScores(old=>({...old,[currentIndex]:i===current.correct}));setShowWhy(true)}}>{option}</button>)}</div>
- {answer!==null&&showWhy&&<div className="transfer-explanation" role="status"><strong>{answer===current.correct?"Yes — you applied the idea.":"Review this decision."}</strong><p><b>Why:</b> {current.reason}</p><h4>Compare the choices</h4>{current.options.map((o,i)=><p key={o}><b>{i===current.correct?"Best answer":"Not the best answer"}:</b> {o}. {i===current.correct?"This matches the reasoning and situation described.":"This choice ignores an important detail or makes a claim that is not supported by the cards and story."}</p>)}<button type="button" onClick={()=>{setRound(v=>v+1);setAnswer(null);setShowWhy(false);if(round%spots.length===spots.length-1)setScores({})}}>Next unfamiliar hand →</button></div>}
- </div></section>;
+ <div className="transfer-heading"><span>POKERLAB · APPLY WHAT YOU LEARNED</span><h2>Practice decisions on changing hands</h2><p>The pot-odds and bluff scenarios change their numbers between rounds. Other skills still use a fixed example bank. These are beginner exercises with play chips, not solver-verified professional assessments.</p><strong>{right} / {seen} correct all-time · {recent.length?Math.round(recent.filter(x=>x.correct).length/recent.length*100):0}% last {recent.length} hands</strong></div>
+ <div className="transfer-card"><label className="transfer-skill-filter">Choose a skill: <select value={selectedTopic} onChange={e=>{setSelectedTopic(e.target.value);setRound(0);setSessionSeed(v=>v+1);setAnswer(null)}}><option>All skills</option>{topics.map(topic=><option key={topic}>{topic}</option>)}</select></label>
+ <small>{current.topic.toUpperCase()} · PRACTICE HAND {round+1}</small><h3>{current.cards}</h3><p>{current.story}</p><h4>{current.question}</h4><div className="transfer-options">{current.options.map((option,i)=><button type="button" key={option} disabled={answer!==null} onClick={()=>submit(i)}>{option}</button>)}</div>
+ {answer!==null&&<div className="transfer-explanation" role="status"><strong>{answer===current.correct?"Correct — here's why.":"Not quite. Let's work through it."}</strong><p>{current.reason}</p><h4>Compare the answers</h4>{current.options.map((option,i)=><p key={option}><b>{i===current.correct?"Best option":"Other option"}:</b> {option}. {i===current.correct?"It follows the stated hand and assumptions.":"It does not fit the information and assumptions given in this exercise."}</p>)}<button type="button" onClick={next}>Next hand →</button></div>}</div>
+ <div className="transfer-card"><h3>Learning by skill</h3><p>Accuracy is a practice signal, not proof of real-game mastery. Focus on your lowest-scoring topics and try the same idea with different cards.</p><div className="transfer-skill-grid">{topics.map(topic=>{const subset=history.filter(x=>x.topic===topic);return <button key={topic} onClick={()=>{setSelectedTopic(topic);setRound(0);setAnswer(null)}}><b>{topic}</b><span>{subset.length?Math.round(subset.filter(x=>x.correct).length/subset.length*100)+"% correct":"Not practiced"} · {subset.length} attempts</span></button>})}</div></div>
+ </section>;
 }
