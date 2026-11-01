@@ -34,7 +34,7 @@ export default function AdvancedAcademy(){
  const current=advancedUnits[unit], count=Object.keys(answers).length, total=advancedUnits.reduce((n,u)=>n+u.drills.length,0);
  const right=advancedUnits.reduce((n,u,i)=>n+u.drills.filter((d,j)=>answers[`${i}-${j}`]===d.correct).length,0);
  const mistakes=advancedUnits.flatMap((u,i)=>u.drills.map((d,j)=>({key:`${i}-${j}`,i,j,d}))).filter(q=>answers[q.key]!==undefined&&answers[q.key]!==q.d.correct);
- const completed=advancedUnits.map((u,i)=>u.drills.every((_,j)=>answers[`${i}-${j}`]===u.drills[j].correct&&reviewed[`${i}-${j}`]));
+ const completed=advancedUnits.map((u,i)=>u.drills.every((_,j)=>answers[`${i}-${j}`]!==undefined));
  const recommended=completed.findIndex(done=>!done);
  const progressPercent=Math.round(count/Math.max(1,total)*100);
  function navigateToModule(index:number){setShowPractice(false);setUnit(index);window.requestAnimationFrame(()=>contentRef.current?.scrollIntoView({behavior:"smooth",block:"start"}));}
