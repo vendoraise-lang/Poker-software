@@ -4537,3 +4537,11 @@ main.academy-new-page{margin:0!important;width:100%!important;max-width:none;min
 .chapter-vocabulary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:15px 0 23px}.chapter-vocabulary>div{background:#112a23;border:1px solid #638773;border-radius:9px;padding:12px}.chapter-vocabulary b{font-size:14px;color:#f8dfa8}.chapter-vocabulary p{margin:5px 0 0!important;font-size:12px!important;color:#d5e9d8;line-height:1.6}
 .advanced-content>.beginner-guide>button{display:block;width:100%;margin:17px 0;padding:15px;background:#dbe9b3;border:0;border-radius:10px;color:#223322;font-weight:800;font-size:14px}
 @media(max-width:760px){.chapter-vocabulary{grid-template-columns:1fr}}
+
+/* Active learning: state reasoning before seeing the answer. */
+.coach-reason-label{display:block;margin:13px 0;color:#e5e8d4;font-size:13px;line-height:1.6}
+.coach-reason-label textarea{display:block;margin-top:7px;box-sizing:border-box;width:100%;max-width:100%;min-height:70px;padding:12px;background:#10231f;color:#f4f2dd;border:1px solid #799384;border-radius:9px;font:inherit;font-size:14px;resize:vertical}
+.advanced-answers button:disabled{opacity:.55;cursor:not-allowed}
+.coach-check{display:flex;align-items:flex-start;gap:10px;margin:14px 0;color:#f5e3a9;font-size:13px;line-height:1.55}
+.coach-check input{margin-top:3px;accent-color:#b3d28e}
+.coach-retry{margin-top:10px;padding:11px 15px;background:#254739;border:1px solid #83a88a;color:#edf4d8;border-radius:8px;font-weight:700}
