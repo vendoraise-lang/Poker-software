@@ -16,7 +16,7 @@ const spots:Spot[]=[
 export default function TransferPractice(){
  const [round,setRound]=useState(0),[answer,setAnswer]=useState<number|null>(null),[scores,setScores]=useState<Record<number,boolean>>({});
  const [showWhy,setShowWhy]=useState(false);
- const spot=spots[round%spots.length],seen=Object.keys(scores).length,right=Object.values(scores).filter(Boolean).length;
+ const seen=Object.keys(scores).length,right=Object.values(scores).filter(Boolean).length;
  const order=Array.from({length:spots.length},(_,i)=>(i*7+3)%spots.length);
  const currentIndex=order[round%spots.length];
  const current=spots[currentIndex];
