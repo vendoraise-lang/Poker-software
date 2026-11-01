@@ -28,8 +28,8 @@ export default function AdvancedAcademy(){
    try {
     const raw=localStorage.getItem("pokerlab-coach-v1");
     if(raw){const value=JSON.parse(raw);if(value&&typeof value==="object"){
-      if(value.reasoning&&typeof value.reasoning==="object")setReasoning(Object.fromEntries(Object.entries(value.reasoning).filter(([,v])=>typeof v==="string"&&v.length<=500)));
-      if(value.reviewed&&typeof value.reviewed==="object")setReviewed(Object.fromEntries(Object.entries(value.reviewed).filter(([,v])=>typeof v==="boolean")));
+      if(value.reasoning&&typeof value.reasoning==="object")setReasoning(Object.fromEntries(Object.entries(value.reasoning).filter((pair):pair is [string,string]=>typeof pair[1]==="string"&&pair[1].length<=500)));
+      if(value.reviewed&&typeof value.reviewed==="object")setReviewed(Object.fromEntries(Object.entries(value.reviewed).filter((pair):pair is [string,boolean]=>typeof pair[1]==="boolean")));
     }}
    }catch{}
    setReady(true);
