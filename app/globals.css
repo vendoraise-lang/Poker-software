@@ -4554,3 +4554,7 @@ main.academy-new-page{margin:0!important;width:100%!important;max-width:none;min
 
 .transfer-skill-filter{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:14px;margin-bottom:18px;color:#f4e3bc}.transfer-skill-filter select{border:1px solid #8cab9a;border-radius:8px;padding:10px 12px;background:#203d31;color:#fff;font-size:14px;max-width:100%}
 .transfer-skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:10px}.transfer-skill-grid button{text-align:left;background:#285040;color:#f2f4e8;border:1px solid #638772;border-radius:10px;padding:12px}.transfer-skill-grid b,.transfer-skill-grid span{display:block;font-size:13px}.transfer-skill-grid span{color:#d0e2d0;margin-top:6px;font-size:12px}
+
+/* Allow deep-linked concept lessons to appear clearly below fixed navigation */
+.academy-lesson[id^="academy-lesson-"]{scroll-margin-top:100px;}
+.academy-lesson:focus{outline:2px solid #cbe59e;outline-offset:4px;}
