@@ -31,7 +31,7 @@ export default function AcademyChambers({foundations,dictionary,preflop,mathemat
  useEffect(()=>{
   const timer=window.setTimeout(()=>{
    let loaded:Visit[]=[];
-   try{const raw=localStorage.getItem(storageKey);if(raw){const parsed:unknown=JSON.parse(raw);if(Array.isArray(parsed)){loaded=parsed.filter((v):v is Visit=>!!v&&typeof v==="object"&&"date" in v&&typeof v.date==="string"&&/^\\d{4}-\\d{2}-\\d{2}$/.test(v.date)&&"chamber" in v&&typeof v.chamber==="string"&&isChamber(v.chamber)).slice(-180);}}}catch{}
+   try{const raw=localStorage.getItem(storageKey);if(raw){const parsed:unknown=JSON.parse(raw);if(Array.isArray(parsed)){loaded=parsed.filter((v):v is Visit=>!!v&&typeof v==="object"&&"date" in v&&typeof v.date==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(v.date)&&"chamber" in v&&typeof v.chamber==="string"&&isChamber(v.chamber)).slice(-180);}}}catch{}
    setVisits(loaded);setToday(currentDate());setReady(true);
    const hash=decodeURIComponent(window.location.hash.slice(1));
    const target=anchorMap[hash];
@@ -70,7 +70,7 @@ export default function AcademyChambers({foundations,dictionary,preflop,mathemat
   </header>
   {active===null?<main className="chambers-hub">
    <div className="chambers-overview">
-    <div className="chambers-overview-copy"><span>YOUR DAILY JOURNEY</span><h2>{todayVisit?"Today's session recorded":"Your next recommended chamber"}</h2><p>{todayVisit?"You have recorded a chamber visit today. You can explore any chamber without losing your progress.":`${recommendation.name} — ${recommendation.topic}. Each visit is a small learning session, not a test you must pass.`}</p><button className="chambers-primary" type="button" onClick={()=>open(todayVisit?chambers[(chambers.findIndex(c=>c.key===todayVisit.chamber)+1)%chambers.length].key:recommendation.key)}>{todayVisit?"Explore another chamber":"Enter today's chamber"} <span aria-hidden="true">→</span></button></div>
+    <div className="chambers-overview-copy"><span>YOUR DAILY JOURNEY</span><h2>{todayVisit?"Today’s session recorded":"Your next recommended chamber"}</h2><p>{todayVisit?"You have recorded a chamber visit today. You can explore any chamber without losing your progress.":`${recommendation.name} — ${recommendation.topic}. Each visit is a small learning session, not a test you must pass.`}</p><button className="chambers-primary" type="button" onClick={()=>open(todayVisit?chambers[(chambers.findIndex(c=>c.key===todayVisit.chamber)+1)%chambers.length].key:recommendation.key)}>{todayVisit?"Explore another chamber":"Enter today’s chamber"} <span aria-hidden="true">→</span></button></div>
     <div className="chambers-overview-stats"><div><strong>{visits.length}</strong><span>Recorded study days</span></div><div><strong>{history.size} / 7</strong><span>Chambers visited</span></div><div><strong>{completedThisCycle} / 7</strong><span>Different rooms in recent visits</span></div></div>
    </div>
    <div className="chambers-section-heading"><div><span>EXPLORE THE ACADEMY</span><h2>The seven learning chambers</h2></div><p>Choose any room. Recommended order is a guide, not a requirement.</p></div>
@@ -80,7 +80,7 @@ export default function AcademyChambers({foundations,dictionary,preflop,mathemat
    <nav className="chambers-internal-nav" aria-label="Learning chamber navigation"><button type="button" onClick={goHome}>← All chambers</button><span>CHAMBER {selected?.number} / 07</span><button type="button" onClick={()=>open(chambers[(chambers.findIndex(c=>c.key===active)+1)%chambers.length].key)}>Next chamber →</button></nav>
    <div className="chambers-focus-header"><div><span>{selected?.subtitle}</span><h2>{selected?.topic}</h2><p>Take your time. The goal is to understand one new idea, not rush through a score.</p></div><span className="chambers-session-time">{selected?.duration} suggested</span></div>
    <div className="chambers-stage">{chamberContent[active]}</div>
-   <div className="chambers-end"><div><span>END OF TODAY'S VISIT</span><h2>What did you learn?</h2><p>After practicing, write down one useful takeaway. You can record today's visit here and continue with a different chamber another day.</p></div><div className="chambers-end-actions"><button type="button" className="chambers-primary" disabled={!ready||!!todayVisit} onClick={completeDay}>{todayVisit?"Today's visit recorded ✓":"Record today's chamber visit"}</button><button type="button" onClick={goHome}>Back to the chambers</button></div></div>
+   <div className="chambers-end"><div><span>END OF TODAY’S VISIT</span><h2>What did you learn?</h2><p>After practicing, write down one useful takeaway. You can record today’s visit here and continue with a different chamber another day.</p></div><div className="chambers-end-actions"><button type="button" className="chambers-primary" disabled={!ready||!!todayVisit} onClick={completeDay}>{todayVisit?"Today’s visit recorded ✓":"Record today’s chamber visit"}</button><button type="button" onClick={goHome}>Back to the chambers</button></div></div>
   </main>}
  </div>;
 }
