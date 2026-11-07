@@ -122,6 +122,22 @@ export default function Academy() {
     [reviews, setReviews] = useState<ReviewData | null>(null);
   const storedSnapshot = useRef<string | null>(null);
   const pendingLesson = useRef<string | null>(null);
+  function openLesson(module: (typeof MODULES)[number], lessonId: string) {
+    pendingLesson.current = lessonId;
+    setModuleId(module.id);
+    setView("Lessons");
+    setFeedback(null);
+    // React does not re-render when the destination is already selected.
+    // In that case, navigate immediately instead of leaving the click inert.
+    if (moduleId === module.id && view === "Lessons") {
+      const target = document.getElementById(`academy-lesson-${lessonId}`);
+      if (target) {
+        pendingLesson.current = null;
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        target.focus({ preventScroll: true });
+      }
+    }
+  }
   useEffect(() => {
     if (!pendingLesson.current || view !== "Lessons") return;
     const target = document.getElementById(`academy-lesson-${pendingLesson.current}`);
@@ -271,19 +287,7 @@ export default function Academy() {
               <button
                 className="primary"
                 onClick={() => {
-                  pendingLesson.current = recommendation.lesson.id;
-                  setModuleId(recommended.id);
-                  setView("Lessons");
-                  setFeedback(null);
-                  // Handle selecting the already-visible module, which may not rerender.
-                  if (moduleId === recommended.id && view === "Lessons") {
-                    const target = document.getElementById(`academy-lesson-${recommendation.lesson.id}`);
-                    if (target) {
-                      pendingLesson.current = null;
-                      target.scrollIntoView({ behavior: "instant", block: "start" });
-                      target.focus({ preventScroll: true });
-                    }
-                  }
+                  openLesson(recommended, recommendation.lesson.id);
                 }}
               >
                 Study recommended module
@@ -566,9 +570,8 @@ export default function Academy() {
                           <button
                             className="subtle-button"
                             onClick={() => {
-                              setModuleId(m.id);
-                              setView("Lessons");
-                              setFeedback(null);
+                              const lesson = m.lessons.find((lesson) => lesson.concept === c);
+                              if (lesson) openLesson(m, lesson.id);
                             }}
                           >
                             Study {LABELS[c]}
