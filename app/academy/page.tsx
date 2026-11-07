@@ -6,18 +6,20 @@ import BluffDecisionLab from "@/components/BluffDecisionLab";
 import StudyPlanner from "@/components/StudyPlanner";
 import PokerDictionary from "@/components/PokerDictionary";
 import TransferPractice from "@/components/TransferPractice";
+import AcademyChambers from "@/components/AcademyChambers";
 import WorkspaceLinks from "@/components/WorkspaceLinks";
 
 export default function Page(){
- return <main className="academy-new-page">
-  <header className="academy-new-hero"><WorkspaceLinks current="Academy"/><span>POKERLAB · THE STRATEGY SCHOOL</span><h1>Learn one concept at a time.</h1><p>Start with the foundation lessons and poker dictionary. Understand the vocabulary and examples before attempting advanced strategy. Every lesson uses play chips only.</p><nav aria-label="Academy sections"><a href="#core-lessons">Start foundation course</a><a href="#dictionary">Poker dictionary</a><a href="#study-plan">My study plan</a><a href="#range-lab">Range lab</a><a href="#math-lab">Decision math</a><a href="#transfer-training">New hand practice</a><a href="#advanced-school">Strategy school</a><a href="#core-lessons">Foundation lessons</a></nav></header>
-  <section id="core-lessons" className="academy-legacy-wrap"><h2>Start here: Foundation lessons</h2><p>Learn the basic words and examples before practicing advanced decisions.</p><Academy/></section>
-  <section id="dictionary"><PokerDictionary/></section>
-  <section id="study-plan"><StudyPlanner/></section>
-  <section id="range-lab"><RangeLab/></section>
-  <section id="math-lab"><DecisionMathLab/></section>
-  <section id="bluff-lab"><BluffDecisionLab/></section>
-  <section id="transfer-training"><TransferPractice/></section>
-  <section id="advanced-school"><AdvancedAcademy/></section>
+ return <main className="academy-new-page academy-chambers-page">
+  <WorkspaceLinks current="Academy"/>
+  <AcademyChambers
+   foundations={<section id="core-lessons" className="academy-legacy-wrap"><Academy/></section>}
+   dictionary={<section id="dictionary"><PokerDictionary/></section>}
+   preflop={<section id="range-lab"><RangeLab/></section>}
+   mathematics={<><section id="math-lab"><DecisionMathLab/></section><section id="bluff-lab"><BluffDecisionLab/></section></>}
+   decisions={<section id="transfer-training"><TransferPractice/></section>}
+   strategy={<section id="advanced-school"><AdvancedAcademy/></section>}
+   reflection={<section id="study-plan"><StudyPlanner/></section>}
+  />
  </main>;
 }
